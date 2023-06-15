@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISI.FileExplorer.Extensions", "ISI.FileExplorer.Extensions\ISI.FileExplorer.Extensions.csproj", "{5F33BDD8-0081-49C1-95F2-C05A55C799ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISI.FileExplorer.Extensions.Runner", "ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj", "{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ISI.FileExplorer.Extensions.Setup", "ISI.FileExplorer.Extensions.Setup\ISI.FileExplorer.Extensions.Setup.wixproj", "{2C01155D-C4D7-4656-ACAA-D32F4E1FADB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E9B3FF52-EC62-4829-B698-BEAAB30F3990}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F33BDD8-0081-49C1-95F2-C05A55C799ED}.Debug|x64.ActiveCfg = Debug|x64
+		{5F33BDD8-0081-49C1-95F2-C05A55C799ED}.Debug|x64.Build.0 = Debug|x64
+		{5F33BDD8-0081-49C1-95F2-C05A55C799ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{5F33BDD8-0081-49C1-95F2-C05A55C799ED}.Release|x64.Build.0 = Release|Any CPU
+		{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}.Debug|x64.ActiveCfg = Debug|x64
+		{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}.Debug|x64.Build.0 = Debug|x64
+		{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}.Release|x64.ActiveCfg = Release|Any CPU
+		{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}.Release|x64.Build.0 = Release|Any CPU
+		{2C01155D-C4D7-4656-ACAA-D32F4E1FADB1}.Debug|x64.ActiveCfg = Debug|x64
+		{2C01155D-C4D7-4656-ACAA-D32F4E1FADB1}.Release|x64.ActiveCfg = Release|x64
+		{2C01155D-C4D7-4656-ACAA-D32F4E1FADB1}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2426ED7A-AA57-4425-B541-EE5A6A8BDF52}
+	EndGlobalSection
+EndGlobal
