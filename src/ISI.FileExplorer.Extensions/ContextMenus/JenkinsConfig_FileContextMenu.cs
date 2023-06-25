@@ -47,6 +47,8 @@ namespace ISI.FileExplorer.Extensions
 		protected override bool CanShowMenu()
 		{
 			var selectedItemPaths = this.GetSelectedItemPaths().ToArray();
+			
+			Logger.LogInformation(string.Format("JenkinsConfig_FileContextMenu.CanShowMenu() selectedItemPaths: {0}", string.Join(", ", selectedItemPaths.Select(selectedItemPath => string.Format("\"{0}\"", selectedItemPath)))));
 
 			return selectedItemPaths.Any(selectedItemPath =>  JenkinsApi.IsJenkinsConfigFile(new () { FileName = selectedItemPath })?.IsJenkinsConfigFile ?? false);
 		}

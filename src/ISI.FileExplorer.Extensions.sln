@@ -8,6 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISI.FileExplorer.Extensions.Runner", "ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj", "{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ISI.FileExplorer.Extensions.Setup", "ISI.FileExplorer.Extensions.Setup\ISI.FileExplorer.Extensions.Setup.wixproj", "{2C01155D-C4D7-4656-ACAA-D32F4E1FADB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F} = {2CC3576F-A2B8-4CA1-BF2E-DD3C8B3C661F}
+		{5F33BDD8-0081-49C1-95F2-C05A55C799ED} = {5F33BDD8-0081-49C1-95F2-C05A55C799ED}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E9B3FF52-EC62-4829-B698-BEAAB30F3990}"
 	ProjectSection(SolutionItems) = preProject

@@ -16,12 +16,16 @@ namespace ISI.FileExplorer.Extensions.Runner
 		[STAThread]
 		static void Main()
 		{
+			Console.WriteLine("ISI.FileExplorer.Extensions.Runner");
+
 			var arguments = new ISI.Extensions.CommandLineArguments(Environment.GetCommandLineArgs(), 1);
 
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 
 			if (string.Equals(arguments.Command, "versionChecker", StringComparison.InvariantCultureIgnoreCase))
 			{
+				Console.WriteLine("versionChecker");
+
 				ISI.FileExplorer.Extensions.ExecuteCommands.VersionChecker_ExecuteCommand.Current.CheckForUpdate(true);
 			}
 			else
