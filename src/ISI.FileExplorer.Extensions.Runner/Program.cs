@@ -20,21 +20,28 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 			var arguments = new ISI.Extensions.CommandLineArguments(Environment.GetCommandLineArgs(), 1);
 
+#if DEBUG
+			arguments = new ISI.Extensions.CommandLineArguments(ISI.FileExplorer.Extensions.VisualStudioSolutions.RefreshSolutionsCommandUuid.Formatted(GuidExtensions.GuidFormat.WithHyphens));
+			arguments.AddParameter(ISI.FileExplorer.Extensions.VisualStudioSolutions.ParameterName_SelectedItemPaths, new[] { @"F:\ISI\Internal Projects\ISI.Cake.Addin" });
+#endif
+
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 
 			if (string.Equals(arguments.Command, "versionChecker", StringComparison.InvariantCultureIgnoreCase))
 			{
 				Console.WriteLine("versionChecker");
 
-				ISI.FileExplorer.Extensions.ExecuteCommands.VersionChecker_ExecuteCommand.Current.CheckForUpdate(true);
+				ISI.FileExplorer.Extensions.Runner.VersionChecker.Current.CheckForUpdate(true);
 			}
 			else
 			{
-				ISI.FileExplorer.Extensions.ServiceProvider.Initialize();
+				ISI.FileExplorer.Extensions.Runner.ServiceProvider.Initialize();
 
 				var commands = ISI.Extensions.TypeLocator.Container.LocalContainer.GetImplementations<IExecuteCommand>(ISI.Extensions.ServiceLocator.Current);
 
-				var command = commands.FirstOrDefault(cmd => cmd.Handles(arguments));
+				var commandUuid = arguments.Command.ToGuid();
+
+				var command = commands.FirstOrDefault(cmd => cmd.Handles(commandUuid));
 
 				if (command != null)
 				{

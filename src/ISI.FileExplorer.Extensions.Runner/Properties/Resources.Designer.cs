@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ISI.FileExplorer.Extensions.Runner.Properties
+namespace ISI.FileExplorer.Extensions.Runner.Runner.Properties
 {
 
 
