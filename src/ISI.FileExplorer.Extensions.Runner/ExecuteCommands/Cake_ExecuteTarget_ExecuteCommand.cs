@@ -12,7 +12,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,27 +25,23 @@ using Microsoft.Extensions.Logging;
 namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
 	[ExecuteCommand]
-	public class Cake_ExecuteTarget_ExecuteCommand : IExecuteCommand
+	public class Cake_ExecuteTarget_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
-		protected Microsoft.Extensions.Logging.ILogger Logger { get; }
 		protected ISI.Extensions.Cake.CakeApi CakeApi { get; }
 
-		public Cake_ExecuteTarget_ExecuteCommand()
+		public Cake_ExecuteTarget_ExecuteCommand(ISI.Extensions.Cake.CakeApi cakeApi)
 		{
-			ServiceProvider.Initialize();
-
-			Logger = ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
-			CakeApi = ISI.Extensions.ServiceLocator.Current.GetService<ISI.Extensions.Cake.CakeApi>();
+			CakeApi = cakeApi;
 		}
 
 		public bool Handles(Guid commandUuid)
 		{
-			return (commandUuid == ISI.FileExplorer.Extensions.Cake.ExecuteTargetCommandUuid);
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.Cake.ExecuteTargetCommandUuid);
 		}
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
 		{
-			if (arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Cake.ParameterName_BuildFileName, out var buildFileName) && arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Cake.ParameterName_Target, out var target))
+			if (arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, out var buildFileName) && arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, out var target))
 			{
 				System.Threading.Tasks.Task.Run(() =>
 				{

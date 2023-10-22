@@ -58,12 +58,12 @@ Task("Build")
 	{
 		SetAssemblyVersionFiles(assemblyVersions);
 
-		var productWxsFile = File("./ISI.FileExplorer.Extensions.Setup/Product.wxs");
+		var productWxsFile = File("./ISI.FileExplorer.Extensions.Setup/Package.wxs");
 		var productWxsContent = FileReadText(productWxsFile);
 
 		try
 		{
-			XmlPoke(productWxsFile, "//*[local-name() = 'Product']/@Version", assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
+			XmlPoke(productWxsFile, "//*[local-name() = 'Package']/@Version", assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
 
 			var getSignAssemblyCommandResponse = GetSignAssemblyCommand(new ISI.Cake.Addin.CodeSigning.GetSignAssemblyCommandUsingSettingsRequest()
 			{

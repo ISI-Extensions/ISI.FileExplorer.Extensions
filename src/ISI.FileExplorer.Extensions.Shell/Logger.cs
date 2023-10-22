@@ -21,11 +21,112 @@ using System.Threading.Tasks;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
-	internal class Logger
+	public class Logger
 	{
-		internal static void AddToLog(string message, params object[] args)
+		private static string GetLogFullName()
 		{
+			return @"C:\Temp\ISI.FileExplorer.Extensions.log";
+		}
 
+		private static bool? _ShouldWriteLog = null;
+
+		private static bool ShouldWriteLog()
+		{
+			if (_ShouldWriteLog.HasValue)
+			{
+				return _ShouldWriteLog.Value;
+			}
+
+			if (System.IO.File.Exists(GetLogFullName()))
+			{
+				_ShouldWriteLog = true;
+				return true;
+			}
+
+			_ShouldWriteLog = false;
+			return false;
+		}
+		private static void AppendToLog(string log)
+		{
+			var logFullName = GetLogFullName();
+
+			System.IO.File.AppendAllText(logFullName, log);
+		}
+		public static void AddToLog(string note)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n", DateTime.UtcNow, note));
+			}
+		}
+		public static void AddToLog(IEnumerable<string> notes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n", DateTime.UtcNow, string.Join("\t\n", notes)));
+			}
+		}
+
+
+
+		public static void AddToLog(string section, string note)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}:\n\t{2}\n", DateTime.UtcNow, section, note));
+			}
+		}
+		public static void AddToLog(string section, IEnumerable<string> notes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}:\n\t{2}\n", DateTime.UtcNow, section, string.Join("\t\n", notes)));
+			}
+		}
+		public static void AddToLog(IEnumerable<KeyValuePair<string, string>> sectionNotes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\n\t{1}\n", DateTime.UtcNow, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}: {1}", sectionNote.Key, sectionNote.Value)))));
+			}
+		}
+		public static void AddToLog(IEnumerable<KeyValuePair<string, IEnumerable<string>>> sectionNotes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\n\t{1}\n", DateTime.UtcNow, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}:\n\t\t{1}", sectionNote.Key, string.Join("\n\t\t", sectionNote.Value))))));
+			}
+		}
+
+
+
+		public static void AddToLog(string owner, string section, string note)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}:\n\t\t{3}\n", DateTime.UtcNow, owner, section, note));
+			}
+		}
+		public static void AddToLog(string owner, string section, IEnumerable<string> notes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}:\n\t\t{3}\n", DateTime.UtcNow, owner, section, string.Join("\t\t\n", notes)));
+			}
+		}
+		public static void AddToLog(string owner, IEnumerable<KeyValuePair<string, string>> sectionNotes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}\n", DateTime.UtcNow, owner, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}: {1}", sectionNote.Key, sectionNote.Value)))));
+			}
+		}
+		public static void AddToLog(string owner, IEnumerable<KeyValuePair<string, IEnumerable<string>>> sectionNotes)
+		{
+			if (ShouldWriteLog())
+			{
+				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}\n", DateTime.UtcNow, owner, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}:\n\t\t{1}", sectionNote.Key, string.Join("\n\t\t", sectionNote.Value))))));
+			}
 		}
 	}
 }

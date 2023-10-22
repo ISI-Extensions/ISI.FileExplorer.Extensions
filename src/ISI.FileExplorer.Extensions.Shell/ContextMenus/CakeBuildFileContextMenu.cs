@@ -24,7 +24,6 @@ namespace ISI.FileExplorer.Extensions.Shell
 {
 	[System.Runtime.InteropServices.ComVisible(true)]
 	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CakeBuildFile")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
 	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
 	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
 	public class CakeBuildFileContextMenu : SharpShell.SharpContextMenu.SharpContextMenu
@@ -120,11 +119,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		protected void ExecuteTargetCommand(string buildFileName, string activeTargetKey = null)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Cake.ExecuteTargetCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Cake.ParameterName_BuildFileName, buildFileName);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Cake.ExecuteTargetCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, buildFileName);
 			if (!string.IsNullOrWhiteSpace(activeTargetKey))
 			{
-				arguments.AddParameter(ISI.FileExplorer.Extensions.Cake.ParameterName_Target, activeTargetKey);
+				arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, activeTargetKey);
 			}
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);

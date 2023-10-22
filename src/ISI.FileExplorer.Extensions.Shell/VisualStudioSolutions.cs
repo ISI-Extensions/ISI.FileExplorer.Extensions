@@ -21,41 +21,24 @@ using System.Threading.Tasks;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
-	public  class Cake
+	public class VisualStudioSolutions
 	{
-		public static Guid ExecuteTargetCommandUuid = Guid.Parse("21b0ab6a-3c7b-4dae-b110-b0fdfa31681d");
-		public const string ParameterName_BuildFileName = "BuildFileName";
-		public const string ParameterName_Target = "Target";
+		public static Guid RefreshSolutionsCommandUuid = Guid.Parse("452fd893-1514-41a3-b1e4-a0ffbdaa39af");
+		public static Guid RunServicesCommandUuid = Guid.Parse("14224238-3274-449b-9cdd-7fa0149826e8");
+		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-		internal const string CakeFileNameExtension = ".cake";
-		internal const string BuildScriptFileName = "build.cake";
-
-		internal static string[] GetTargetKeysFromBuildScript(string buildScriptFullName)
+		public static string[] DefaultExcludePathFilters => new[]
 		{
-			var rgTargets = new System.Text.RegularExpressions.Regex(@"(?im-snx:.*(?:Task\(\"")(?<target>[\w-]*)(?:\""\)).*)+");
+			".vs",
+			".git",
+			".svn",
+			".nuget",
+			"obj",
+			"Resources",
+			"packages",
+			"_ReSharper.Caches",
+		};
 
-			var targets = new List<string>();
-
-			var buildCommands = System.IO.File.ReadAllText(buildScriptFullName);
-
-			var matches = rgTargets.Matches(buildCommands);
-
-			foreach (System.Text.RegularExpressions.Match match in matches)
-			{
-				targets.Add(match.Groups["target"].Value);
-			}
-
-			return targets.ToArray();
-		}
-
-		internal static bool IsBuildScriptFile(string buildScriptFullName)
-		{
-			if (string.Equals(System.IO.Path.GetFileName(buildScriptFullName), BuildScriptFileName, StringComparison.CurrentCultureIgnoreCase))
-			{
-				return GetTargetKeysFromBuildScript(buildScriptFullName).Any();
-			}
-
-			return false;
-		}
+		public static int MaxCheckDirectoryDepth => 5;
 	}
 }

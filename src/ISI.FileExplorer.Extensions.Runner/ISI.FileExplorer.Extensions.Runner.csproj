@@ -15,6 +15,47 @@
     <RuntimeIdentifiers>win;win-x64</RuntimeIdentifiers>
     <TargetFrameworkProfile />
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -32,13 +73,11 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ISI.FileExplorer.Extensions.AssemblyInfo.cs">
       <Link>Properties\ISI.FileExplorer.Extensions.AssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\ISI.FileExplorer.Extensions.Common.cs">
-      <Link>ISI.FileExplorer.Extensions.Common.cs</Link>
     </Compile>
     <Compile Include="..\ISI.FileExplorer.Extensions.Version.cs">
       <Link>Properties\ISI.FileExplorer.Extensions.Version.cs</Link>
@@ -72,7 +111,9 @@
     <None Include="..\ISI.FileExplorer.Extensions.licenseheader">
       <Link>ISI.FileExplorer.Extensions.licenseheader</Link>
     </None>
-    <None Include="ISI.FileExplorer.Extensions.snk" />
+    <None Include="..\ISI.FileExplorer.Extensions.snk">
+      <Link>ISI.FileExplorer.Extensions.snk</Link>
+    </None>
     <None Include="T4LocalContent\T4LocalContent.Generator.t4" />
     <None Include="T4LocalContent\T4LocalContent.settings.t4" />
   </ItemGroup>
@@ -129,7 +170,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ISI.FileExplorer.Extensions.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Lantern.ico</ApplicationIcon>
@@ -158,40 +200,40 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ISI.Extensions">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Cake">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.DependencyInjection.Iunq">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Git">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins.Forms">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.JsonSerialization.Newtonsoft">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Nuget">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Scm">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Svn">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio.Forms">
-      <Version>10.0.8693.2752</Version>
+      <Version>10.0.8695.26605</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +246,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ISI.FileExplorer.Extensions.Shell\ISI.FileExplorer.Extensions.Shell.csproj">
+      <Project>{2a6fb40e-e373-4b23-ae2b-92ca1c000d92}</Project>
+      <Name>ISI.FileExplorer.Extensions.Shell</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition=" '$(SignAssemblyCommand)' != '' ">
@@ -254,5 +302,9 @@
       <EmbeddedResource Include="**\*.woff" />
       <EmbeddedResource Include="**\web.config" />
     </ItemGroup>
+  </Target>
+  <Target Name="AfterBuild" Condition=" '$(SignAssemblyCommand)' != '' ">
+    <Exec Command="$(SignAssemblyCommand) &quot;$(OutDir)ISI.FileExplorer.Extensions.Shell.dll&quot;" />
+    <Exec Command="$(SignAssemblyCommand) &quot;$(OutDir)ISI.FileExplorer.Extensions.Runner.exe&quot;" />
   </Target>
 </Project>

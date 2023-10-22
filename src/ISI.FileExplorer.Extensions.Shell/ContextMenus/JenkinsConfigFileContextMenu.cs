@@ -25,7 +25,6 @@ namespace ISI.FileExplorer.Extensions.Shell
 	[System.Runtime.InteropServices.ComVisible(true)]
 	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.JenkinsConfigFile")]
 	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Jenkins.JenkinsJobConfigFileNameExtension)]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ISI.FileExplorer.Extensions.Shell.Jenkins.JenkinsJobConfigFileNameExtension)]
 	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
 	public class JenkinsConfigFileContextMenu : SharpShell.SharpContextMenu.SharpContextMenu
 	{
@@ -81,16 +80,16 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		protected void PushJenkinsConfigToJenkinsCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Jenkins.PushJenkinsConfigToJenkinsCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Jenkins.PushJenkinsConfigToJenkinsCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}
 
 		protected void PullJenkinsConfigFromJenkinsCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Jenkins.PullJenkinsConfigFromJenkinsCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Jenkins.PullJenkinsConfigFromJenkinsCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}

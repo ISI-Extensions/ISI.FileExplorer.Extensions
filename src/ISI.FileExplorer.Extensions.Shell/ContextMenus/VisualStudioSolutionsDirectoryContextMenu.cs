@@ -41,7 +41,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			{
 				if (System.IO.Directory.Exists(directory))
 				{
-					if (ISI.FileExplorer.Extensions.Shell.IO.CheckForExistence(directory, "*.sln", ISI.FileExplorer.Extensions.VisualStudioSolutions.DefaultExcludePathFilters, ISI.FileExplorer.Extensions.VisualStudioSolutions.MaxCheckDirectoryDepth))
+					if (ISI.FileExplorer.Extensions.Shell.IO.CheckForExistence(directory, "*.sln", ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.DefaultExcludePathFilters, ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.MaxCheckDirectoryDepth))
 					{
 						return true;
 					}
@@ -92,16 +92,16 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		protected void RefreshSolutionsCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.VisualStudioSolutions.RefreshSolutionsCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.VisualStudioSolutions.ParameterName_SelectedItemPaths, selectedItemPaths);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RefreshSolutionsCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}
 
 		protected void RunServicesCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.VisualStudioSolutions.RunServicesCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.VisualStudioSolutions.ParameterName_SelectedItemPaths, selectedItemPaths);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RunServicesCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}

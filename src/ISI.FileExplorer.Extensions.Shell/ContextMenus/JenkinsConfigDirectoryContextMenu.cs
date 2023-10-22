@@ -62,8 +62,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		protected void PullJenkinsConfigFromJenkinsCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Jenkins.PullJenkinsConfigFromJenkinsCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Jenkins.PullJenkinsConfigFromJenkinsCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Jenkins.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}

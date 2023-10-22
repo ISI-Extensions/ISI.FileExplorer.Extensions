@@ -25,25 +25,16 @@ using Microsoft.Extensions.Logging;
 namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
 	[ExecuteCommand]
-	public class RunServices_ExecuteCommand : IExecuteCommand
+	public class RunServices_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
-		protected Microsoft.Extensions.Logging.ILogger Logger { get; }
-
-		public RunServices_ExecuteCommand()
-		{
-			ServiceProvider.Initialize();
-
-			Logger = ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
-		}
-
 		public bool Handles(Guid commandUuid)
 		{
-			return (commandUuid == ISI.FileExplorer.Extensions.VisualStudioSolutions.RunServicesCommandUuid);
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RunServicesCommandUuid);
 		}
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
 		{
-			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.VisualStudioSolutions.ParameterName_SelectedItemPaths, out var selectedItemPaths))
+			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, out var selectedItemPaths))
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
 

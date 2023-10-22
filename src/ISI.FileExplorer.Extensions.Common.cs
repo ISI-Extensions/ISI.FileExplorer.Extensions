@@ -23,16 +23,10 @@ namespace ISI.FileExplorer.Extensions
 {
 	public class Cake
 	{
-		public static Guid ExecuteTargetCommandUuid = Guid.Parse("21b0ab6a-3c7b-4dae-b110-b0fdfa31681d");
-		public const string ParameterName_BuildFileName = "BuildFileName";
-		public const string ParameterName_Target = "Target";
 	}
 
 	public class Jenkins
 	{
-		public static Guid PushJenkinsConfigToJenkinsCommandUuid = Guid.Parse("bbec9892-4b07-4d3a-be6a-f34da8bbadaa");
-		public static Guid PullJenkinsConfigFromJenkinsCommandUuid = Guid.Parse("1c6fec21-d56d-4445-9bd4-7bf83bf71f85");
-		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 	}
 
 	public class VisualStudioSolutions

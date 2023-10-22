@@ -21,8 +21,12 @@ using System.Threading.Tasks;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
-	internal class Jenkins
+	public class Jenkins
 	{
+		public static Guid PushJenkinsConfigToJenkinsCommandUuid = Guid.Parse("bbec9892-4b07-4d3a-be6a-f34da8bbadaa");
+		public static Guid PullJenkinsConfigFromJenkinsCommandUuid = Guid.Parse("1c6fec21-d56d-4445-9bd4-7bf83bf71f85");
+		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
+
 		internal const string JenkinsJobConfigFileNameExtension = ".jenkinsConfig";
 
 		internal static bool IsJenkinsConfigFile(string fileName)

@@ -24,7 +24,6 @@ namespace ISI.FileExplorer.Extensions.Shell
 {
 	[System.Runtime.InteropServices.ComVisible(true)]
 	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.AssemblyName")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ".dll")]
 	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ".dll")]
 	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
 	public class AssemblyNameBindingRedirectFileContextMenu : SharpShell.SharpContextMenu.SharpContextMenu

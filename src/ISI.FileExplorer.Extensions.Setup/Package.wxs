@@ -1,0 +1,91 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Package Name="ISI.FileExplorer.Extensions" Language="1033" Version="3.0.0.0" Manufacturer="Integrated Solutions, Inc." UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7" InstallerVersion="200">
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="ISI.FileExplorer.Extensions" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="ProductComponentsGroup" />
+			<ComponentRef Id="ApplicationShortcut" />
+		</Feature>
+		<Icon Id="Lantern.ico" SourceFile="Lantern.ico" />
+		<Property Id="ARPPRODUCTICON" Value="Lantern.ico" />
+		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+		<Upgrade Id="84159581-7a82-4e9a-9536-636aec1cca0c">
+			<UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
+		</Upgrade>
+
+		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;srm.exe&quot; install &quot;ISI.FileExplorer.Extensions.Shell.dll&quot; -codebase" Execute="deferred" Return="check" Impersonate="no" />
+		<CustomAction Id="LaunchBrowser" Property="BROWSER" ExeCommand="https://git.isi-net.com/ISI/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
+		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;srm.exe&quot; uninstall &quot;ISI.FileExplorer.Extensions.Shell.dll&quot; -codebase" Execute="deferred" Return="check" Impersonate="no" />
+		<InstallExecuteSequence>
+			<Custom Action="InstallShell" After="InstallFiles" Condition="Installed" />
+			<Custom Action="LaunchBrowser" After="InstallFinalize" Condition="NOT Installed" />
+			<Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE=&quot;ALL&quot;)" />
+		</InstallExecuteSequence>
+
+		<UI Id="UserInterface">
+			<TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+			<TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="9" Bold="yes" />
+			<TextStyle Id="WixUI_Font_Title"  FaceName="Tahoma" Size="9" Bold="yes" />
+
+			<Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+
+			<DialogRef Id="ProgressDlg" />
+			<DialogRef Id="ErrorDlg" />
+			<DialogRef Id="FilesInUse" />
+			<DialogRef Id="FatalError" />
+			<DialogRef Id="UserExit" />
+
+			<Publish Dialog="WelcomeDlg" Control="Next" Event="EndDialog" Value="Return" Order="2" />
+			<Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999" />
+		</UI>
+
+		<UIRef Id="WixUI_Common" />
+	</Package>
+
+	<Fragment>
+		<StandardDirectory Id="ProgramFiles64Folder">
+			<Directory Id="IntegratedSolutionsIncFolder" Name="Integrated Solutions Inc">
+				<Directory Id="INSTALLFOLDER" Name="ISI.FileExplorer.Extensions" />
+			</Directory>
+		</StandardDirectory>
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="ISI.FileExplorer.Extensions" />
+		</StandardDirectory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<ComponentRef Id="ApplicationShortcut" />
+		</ComponentGroup>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
+			<Component Id="RegistryEntries" Guid="e84c6f5d-5296-43de-8b9f-ea244124c4d1" KeyPath="yes">
+				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\IconHandler" Type="string" Value="{1309941f-fc9c-48fa-815a-2aaa23925bb1}" />
+				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\JenkinsConfigFileContextMenu" Type="string" Value="{fa56f0e4-bb0c-41dc-91ec-1f70770ffa3d}" />
+				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\ContextMenuHandlers\JenkinsConfigFileContextMenu" Type="string" Value="{fa56f0e4-bb0c-41dc-91ec-1f70770ffa3d}" />
+				<RegistryValue Root="HKCR" Key=".cake\shellex\IconHandler" Type="string" Value="{e590fd47-7dac-464e-8040-ba4efe535e0e}" />
+				<RegistryValue Root="HKCR" Key=".cake\shellex\CakeBuildFileContextMenu" Type="string" Value="{5e87672e-2deb-45c8-adee-4c8a082dde71}" />
+				<RegistryValue Root="HKCR" Key=".cake\shellex\ContextMenuHandlers\CakeBuildFileContextMenu" Type="string" Value="{5e87672e-2deb-45c8-adee-4c8a082dde71}" />
+				<RegistryValue Root="HKCR" Key=".cscss\shellex\IconHandler" Type="string" Value="{0f207e31-c781-4eb1-850c-d7a94ad845fe}" />
+				<RegistryValue Root="HKCR" Key=".csjs\shellex\IconHandler" Type="string" Value="{c022c514-5b75-4a36-be05-c30d34fc8a8d}" />
+				<RegistryValue Root="HKCR" Key=".csless\shellex\IconHandler" Type="string" Value="{33b981e3-5a5c-4ca9-8656-87aa0bfeb90d}" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+
+	<Fragment>
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut">
+				<Shortcut Id="ApplicationStartMenuShortcut" Name="ISI.FileExplorer.Extensions" WorkingDirectory="INSTALLFOLDER" Target="ISI.FileExplorer.Extensions.Runner.exe" Icon="Lantern.ico" IconIndex="0" />
+				<RemoveFolder Id="RemoveProgramFilesFolder" Directory="ProgramFiles64Folder" On="uninstall" />
+				<RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Integrated Solutions Inc\ISI.FileExplorer.Extensions" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+</Wix>
