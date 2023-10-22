@@ -26,8 +26,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 {
 	public class VersionChecker
 	{
-		private const string VersionUrl = @"https://www.isi-net.com/file-store/download/XXXXXXXXXXXXXXXXXXXXXXXXXXXXX/ISI.FileExplorer.Extensions.Current.Version.txt";
-		private const string InstallerUrl = @"https://www.isi-net.com/file-store/download/XXXXXXXXXXXXXXXXXXXXXXXXXXXXX/ISI.FileExplorer.Extensions.msi";
+		private const string VersionUrl = @"https://www.isi-net.com/file-store/download/4a1700b7-2dc9-42d1-989d-76357ff7615b/ISI.FileExplorer.Extensions.Current.Version.txt";
+		private const string InstallerUrl = @"https://www.isi-net.com/file-store/download/6cee4d35-449c-409a-8b46-c0c3ed066323/ISI.FileExplorer.Extensions.msi";
 
 		private static VersionChecker _current = null;
 		public static VersionChecker Current => _current ??= new VersionChecker();
