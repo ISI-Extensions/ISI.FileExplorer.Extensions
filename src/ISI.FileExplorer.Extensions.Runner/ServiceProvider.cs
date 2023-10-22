@@ -50,7 +50,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 						//.AddFilter(level => level >= Microsoft.Extensions.Logging.LogLevel.Information)
 					)
 					//.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_ => new ISI.Extensions.ConsoleLogger())
-					.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_ => new ISI.Extensions.FileLogger(@"C:\Temp\ISI.FileExplorer.Extensions", string.Format("ISI.FileExplorer.Extensions {0}.log", DateTime.Now.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortable))))
+					.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_ => new ISI.Extensions.FileLogger(ISI.FileExplorer.Extensions.Shell.Logger.GetLogDirectory(), ISI.FileExplorer.Extensions.Shell.Logger.GetLogFileName()))
 
 					.AddSingleton<ISI.Extensions.DateTimeStamper.IDateTimeStamper, ISI.Extensions.DateTimeStamper.LocalMachineDateTimeStamper>()
 

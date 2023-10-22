@@ -12,7 +12,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +23,27 @@ namespace ISI.FileExplorer.Extensions.Shell
 {
 	public class Logger
 	{
-		private static string GetLogFullName()
+		public static string GetLogDirectory()
 		{
-			return @"C:\Temp\ISI.FileExplorer.Extensions.log";
+			var directory = @"C:\ProgramData\ISI.FileExplorer.Extensions";
+
+			System.IO.Directory.CreateDirectory(directory);
+
+			return directory;
+		}
+
+		public static string GetLogFileName()
+		{
+			return $"ISI.FileExplorer.Extensions.{DateTime.Today.Date:yyyyMMdd}.log";
+		}
+
+		public static string GetLogFullName()
+		{
+			var directory = @"C:\ProgramData\ISI.FileExplorer.Extensions";
+
+			System.IO.Directory.CreateDirectory(directory);
+
+			return System.IO.Path.Combine(GetLogDirectory(), GetLogFileName());
 		}
 
 		private static bool? _ShouldWriteLog = null;
@@ -44,7 +62,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			}
 
 			_ShouldWriteLog = false;
-			return false;
+
+			return _ShouldWriteLog.GetValueOrDefault();
 		}
 		private static void AppendToLog(string log)
 		{

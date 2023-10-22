@@ -27,7 +27,35 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 
-			if (string.Equals(arguments.Command, "versionChecker", StringComparison.InvariantCultureIgnoreCase))
+			if (string.Equals(arguments.Command, "install", StringComparison.InvariantCultureIgnoreCase))
+			{
+				Console.WriteLine("install");
+
+				var shellFullName = System.IO.Path.Combine(ISI.Extensions.IO.Path.GetBinDirectory(), "ISI.FileExplorer.Extensions.Shell.dll");
+
+				var registrationType = Environment.Is64BitOperatingSystem ? SharpShell.ServerRegistration.RegistrationType.OS64Bit : SharpShell.ServerRegistration.RegistrationType.OS32Bit;
+
+				var regasm = new SharpShell.Helpers.RegAsm();
+
+				var success = registrationType == SharpShell.ServerRegistration.RegistrationType.OS32Bit ? regasm.Register32(shellFullName, true) : regasm.Register64(shellFullName, true);
+
+				Console.WriteLine(success ? "Installed" : "Failed");
+			}
+			else if (string.Equals(arguments.Command, "uninstall", StringComparison.InvariantCultureIgnoreCase))
+			{
+				Console.WriteLine("uninstall");
+
+				var shellFullName = System.IO.Path.Combine(ISI.Extensions.IO.Path.GetBinDirectory(), "ISI.FileExplorer.Extensions.Shell.dll");
+
+				var registrationType = Environment.Is64BitOperatingSystem ? SharpShell.ServerRegistration.RegistrationType.OS64Bit : SharpShell.ServerRegistration.RegistrationType.OS32Bit;
+
+				var regasm = new SharpShell.Helpers.RegAsm();
+
+				var success = registrationType == SharpShell.ServerRegistration.RegistrationType.OS32Bit ? regasm.Unregister32(shellFullName) : regasm.Unregister32(shellFullName);
+
+				Console.WriteLine(success ? "Uninstalled" : "Failed");
+			}
+			else if (string.Equals(arguments.Command, "versionChecker", StringComparison.InvariantCultureIgnoreCase))
 			{
 				Console.WriteLine("versionChecker");
 
@@ -37,7 +65,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 			{
 				ISI.FileExplorer.Extensions.Runner.ServiceProvider.Initialize();
 
-				var commands = ISI.Extensions.TypeLocator.Container.LocalContainer.GetImplementations<IExecuteCommand>(ISI.Extensions.ServiceLocator.Current);
+				var commands = ISI.Extensions.TypeLocator.Container.LocalContainer.GetImplementations<ISI.FileExplorer.Extensions.Runner.IExecuteCommand>(ISI.Extensions.ServiceLocator.Current);
 
 				var commandUuid = arguments.Command.ToGuid();
 

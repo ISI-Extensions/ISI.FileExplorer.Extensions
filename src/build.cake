@@ -142,7 +142,8 @@ Task("Package")
 		FileWriteText(File(string.Format("../Publish/{0}.Current.Version.txt", artifactName)), assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
 		
 		CopyFile(File("./ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), buildArtifactMsiFile);
-		
+		CopyFile(File("./ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), File(string.Format("../Publish/{0}.msi", artifactName)));
+
 		DeleteAgedPackages(new ISI.Cake.Addin.PackageComponents.DeleteAgedPackagesRequest()
 		{
 			PackagesDirectory = buildArtifactMsiFile.Path.GetDirectory().FullPath,
@@ -214,10 +215,10 @@ Task("Production-Deploy")
 		});
 
 		var artifactDateTimeStampVersionUrl = string.Format("https://www.isi-net.com/file-store/download/{0:D}/{1}.Current.DateTimeStamp.Version.txt", getOrCreateBuildArtifactRedirectsResponse.ArtifactVersionFileStoreUuid, artifactName); 
-		var artifactDownloadUrl = string.Format("https://www.isi-net.com/file-store/download/{0:D}/{1}.zip", getOrCreateBuildArtifactRedirectsResponse.ArtifactFileStoreUuid, artifactName); 
+		var artifactDownloadUrl = string.Format("https://www.isi-net.com/file-store/download/{0:D}/{1}.msi", getOrCreateBuildArtifactRedirectsResponse.ArtifactFileStoreUuid, artifactName); 
 
 		Information(string.Format("curl {0} --output {1}.Current.DateTimeStamp.Version.txt", artifactDateTimeStampVersionUrl, artifactName));
-		Information(string.Format("curl {0} --output {1}.zip", artifactDownloadUrl, artifactName));
+		Information(string.Format("curl {0} --output {1}.msi", artifactDownloadUrl, artifactName));
 	});
 
 Task("Default")
