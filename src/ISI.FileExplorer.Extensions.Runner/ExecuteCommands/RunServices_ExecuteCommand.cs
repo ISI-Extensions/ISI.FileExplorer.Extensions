@@ -38,7 +38,7 @@ namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
 
-				return ISI.Extensions.VisualStudio.Forms.RunWindowsServices.CreateForm(selectedItemPaths, true);
+				return ISI.Extensions.VisualStudio.Forms.RunServices.CreateForm(selectedItemPaths, true);
 			}
 
 			return null;

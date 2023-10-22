@@ -77,7 +77,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 				var menuItem = new System.Windows.Forms.ToolStripMenuItem()
 				{
 					Name = "ISI.FileExplorer.Extensions.Shell.VisualStudioSolutionsDirectoryContextMenu.RunServices",
-					Text = "Run WindowsService(s)",
+					Text = "Run Service(s)",
 				};
 
 				menuItem.Click += (sender, args) => RunServicesCommand(this.GetSelectedItemPaths());

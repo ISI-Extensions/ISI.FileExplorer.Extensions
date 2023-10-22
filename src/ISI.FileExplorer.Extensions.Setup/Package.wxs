@@ -81,9 +81,9 @@
 
 	<Fragment>
 		<DirectoryRef Id="ApplicationProgramsFolder">
-			<Component Id="ApplicationShortcut">
-				<Shortcut Id="ApplicationStartMenuShortcut" Name="ISI.FileExplorer.Extensions" WorkingDirectory="INSTALLFOLDER" Target="ISI.FileExplorer.Extensions.Runner.exe" Icon="Lantern.ico" IconIndex="0" />
-				<RemoveFolder Id="RemoveProgramFilesFolder" Directory="ProgramFiles64Folder" On="uninstall" />
+			<Component Id="ApplicationShortcut" Guid="c202d48d-8d1b-47d1-abc7-e7c6fa6b0c43">
+				<Shortcut Id="ISI.FileExplorer.Extensions.Start.Menu.Shortcut" Name="Check For Update" Icon="Lantern.ico" Target="[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe" Arguments="versionChecker" WorkingDirectory="INSTALLFOLDER" />
+				<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
 				<RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
 				<RegistryValue Root="HKCU" Key="Software\Integrated Solutions Inc\ISI.FileExplorer.Extensions" Name="installed" Type="integer" Value="1" KeyPath="yes" />
 			</Component>
