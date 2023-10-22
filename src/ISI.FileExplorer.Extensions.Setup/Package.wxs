@@ -23,7 +23,7 @@
 		<InstallExecuteSequence>
 			<Custom Action="InstallShell" After="InstallFiles" Condition="NOT Installed" />
 			<Custom Action="LaunchBrowser" After="InstallFinalize" Condition="NOT Installed" />
-			<Custom Action="UninstallShell" Before="RemoveFiles" Condition="Installed" />
+			<Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE=&quot;ALL&quot;)" />
 		</InstallExecuteSequence>
 
 		<UI Id="UserInterface">
