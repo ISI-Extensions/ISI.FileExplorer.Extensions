@@ -74,7 +74,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 							{
 								using (var streamReader = new System.IO.StreamReader(responseStream))
 								{
-									newVersion = streamReader.ReadToEnd();
+									newVersion = (new ISI.Extensions.Scm.DateTimeStampVersion(streamReader.ReadToEnd())).Version.ToString();
 								}
 							}
 						}

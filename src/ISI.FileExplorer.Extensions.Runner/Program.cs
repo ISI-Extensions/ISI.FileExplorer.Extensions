@@ -21,6 +21,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 			var arguments = new ISI.Extensions.CommandLineArguments(Environment.GetCommandLineArgs(), 1);
 
 #if DEBUG
+			//arguments = new ISI.Extensions.CommandLineArguments("versionChecker");
+
 			arguments = new ISI.Extensions.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RefreshSolutionsCommandUuid.Formatted(GuidExtensions.GuidFormat.WithHyphens));
 			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, new[] { @"F:\ISI\Internal Projects\ISI.Cake.Addin" });
 #endif
