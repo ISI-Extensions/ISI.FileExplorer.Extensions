@@ -60,3 +60,17 @@ Pick Solutions and options
 
 ![](Artwork/VisualStudioSolutionsRunServicesSelector.png)
 
+
+
+
+### Get AssemblyName BindingRedirect
+
+* Get AssemblyName BindingRedirect
+
+If you right click on any dll
+
+![](Artwork/GetAssemblyNameBindingRedirect.png)
+
+and the BindingRedirect is now in your clipboard
+
+
