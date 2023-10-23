@@ -31,7 +31,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 		{
 			InitializeComponent();
 
-			ISI.Extensions.WinForms.ThemeHelper.SetWindowThemeForms(this);
+			ISI.Extensions.WinForms.ThemeHelper.SyncTheme(this);
 
 			Icon = new Icon(ISI.FileExplorer.Extensions.Runner.T4Resources.Artwork.GetLantern_icoStream());
 			ControlBox = true;
