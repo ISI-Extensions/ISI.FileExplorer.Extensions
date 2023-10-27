@@ -57,16 +57,6 @@ namespace ISI.FileExplorer.Extensions.Runner
 					.AddSingleton<ISI.Extensions.JsonSerialization.IJsonSerializer, ISI.Extensions.JsonSerialization.Newtonsoft.NewtonsoftJsonSerializer>()
 					.AddSingleton<ISI.Extensions.Serialization.ISerialization, ISI.Extensions.Serialization.Serialization>()
 
-					//.AddSingleton<ISI.Extensions.StatusTrackers.FileStatusTrackerFactory>()
-					//.AddSingleton<ISI.Extensions.JsonSerialization.Newtonsoft.NewtonsoftJsonSerializer>()
-					//.AddSingleton<ISI.Extensions.Jenkins.JenkinsApi>()
-					//.AddSingleton<ISI.Extensions.Svn.SvnApi>()
-					//.AddSingleton<ISI.Extensions.Git.GitApi>()
-					//.AddSingleton<ISI.Extensions.Scm.SourceControlClientApi>()
-					//.AddSingleton<ISI.Extensions.Scm.BuildScriptApi>()
-					//.AddSingleton<ISI.Extensions.Nuget.NugetApi>()
-					//.AddSingleton<ISI.Extensions.VisualStudio.SolutionApi>()
-
 					.AddConfigurationRegistrations(configuration)
 					.ProcessServiceRegistrars()
 					;

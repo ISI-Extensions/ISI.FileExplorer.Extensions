@@ -38,6 +38,7 @@
     <Compile Include="..\ISI.FileExplorer.Extensions.Version.cs">
       <Link>Properties\ISI.FileExplorer.Extensions.Version.cs</Link>
     </Compile>
+    <Compile Include="Nuget.cs" />
     <Compile Include="VisualStudioSolutions.cs" />
     <None Include="..\ISI.FileExplorer.Extensions.licenseheader">
       <Link>ISI.FileExplorer.Extensions.licenseheader</Link>

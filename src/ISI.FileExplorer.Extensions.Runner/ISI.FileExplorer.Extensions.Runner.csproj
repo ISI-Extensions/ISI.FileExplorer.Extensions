@@ -83,6 +83,7 @@
       <Link>Properties\ISI.FileExplorer.Extensions.Version.cs</Link>
     </Compile>
     <Compile Include="ExecuteCommandAttribute.cs" />
+    <Compile Include="ExecuteCommands\UpdateNugetPackages_ExecuteCommand.cs" />
     <Compile Include="FileExplorerSettings\GetLastCheckedDateTimeUtc.cs" />
     <Compile Include="FileExplorerSettings\Load.cs" />
     <Compile Include="FileExplorerSettings\Save.cs" />
@@ -199,40 +200,43 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ISI.Extensions">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Cake">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.DependencyInjection.Iunq">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Git">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins.Forms">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.JsonSerialization.Newtonsoft">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Nuget">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
+    </PackageReference>
+    <PackageReference Include="ISI.Extensions.Nuget.Forms">
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Scm">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Svn">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio.Forms">
-      <Version>10.0.8696.34174</Version>
+      <Version>10.0.8700.39170</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

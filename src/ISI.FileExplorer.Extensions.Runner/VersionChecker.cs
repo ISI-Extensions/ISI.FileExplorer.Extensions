@@ -47,10 +47,11 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 		private DateTime? LastCheckedDateTimeUtc = null;
 
-		public void CheckForUpdate(bool forceCheck = false)
+		public bool CheckForUpdate(bool forceCheck = false)
 		{
+			var updateStarted = false;
 #if DEBUG
-			return;
+			return true;
 #endif
 
 			LastCheckedDateTimeUtc = FileExplorerSettings.GetLastCheckedDateTimeUtc() ?? DateTime.MinValue;
@@ -88,6 +89,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 								if (newVersionForm.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
 								{
 									System.Diagnostics.Process.Start(InstallerUrl);
+
+									updateStarted = true;
 								}
 							}
 						}
@@ -106,6 +109,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 					statusForm.ShowDialog();
 				}
 			}
+
+			return !updateStarted;
 		}
 	}
 }
