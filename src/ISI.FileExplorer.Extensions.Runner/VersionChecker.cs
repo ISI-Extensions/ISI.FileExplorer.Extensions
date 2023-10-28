@@ -84,7 +84,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 						if (forceCheck || newVersionFound)
 						{
-							using (var newVersionForm = new ISI.FileExplorer.Extensions.Runner.NewVersionForm(forceCheck, newVersionFound))
+							using (var newVersionForm = new ISI.FileExplorer.Extensions.Runner.NewVersionForm(forceCheck, newVersionFound, currentVersion, newVersion))
 							{
 								if (newVersionForm.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
 								{
