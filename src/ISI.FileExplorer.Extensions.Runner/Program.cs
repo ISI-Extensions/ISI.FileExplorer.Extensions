@@ -61,10 +61,16 @@ namespace ISI.FileExplorer.Extensions.Runner
 			{
 				Console.WriteLine("versionChecker");
 
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+
 				ISI.FileExplorer.Extensions.Runner.VersionChecker.Current.CheckForUpdate(true);
 			}
 			else
 			{
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+
 				if (ISI.FileExplorer.Extensions.Runner.VersionChecker.Current.CheckForUpdate())
 				{
 					ISI.FileExplorer.Extensions.Runner.ServiceProvider.Initialize();
@@ -77,9 +83,6 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 					if (command != null)
 					{
-						Application.EnableVisualStyles();
-						Application.SetCompatibleTextRenderingDefault(false);
-
 						var form = command.Execute(arguments);
 
 						if (form != null)
