@@ -41,16 +41,18 @@ namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
 		{
-			if (arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, out var buildFileName) && arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, out var target))
+			if (arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, out var buildFileName))
 			{
-				System.Threading.Tasks.Task.Run(() =>
+				if (!arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, out var target))
 				{
-					CakeApi.ExecuteBuildTarget(new ISI.Extensions.Cake.DataTransferObjects.CakeApi.ExecuteBuildTargetRequest()
-					{
-						BuildScriptFullName = buildFileName,
-						Target = target,
-						UseShell = true,
-					});
+					target = string.Empty;
+				}
+
+				CakeApi.ExecuteBuildTarget(new ISI.Extensions.Cake.DataTransferObjects.CakeApi.ExecuteBuildTargetRequest()
+				{
+					BuildScriptFullName = buildFileName,
+					Target = target,
+					UseShell = true,
 				});
 			}
 

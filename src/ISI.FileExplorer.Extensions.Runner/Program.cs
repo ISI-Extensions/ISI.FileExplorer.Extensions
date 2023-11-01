@@ -23,8 +23,12 @@ namespace ISI.FileExplorer.Extensions.Runner
 #if DEBUG
 			//arguments = new ISI.Extensions.CommandLineArguments("versionChecker");
 
-			arguments = new ISI.Extensions.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RefreshSolutionsCommandUuid.Formatted(GuidExtensions.GuidFormat.WithHyphens));
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, new[] { @"F:\ISI\Internal Projects\ISI.Cake.Addin" });
+			//arguments = new ISI.Extensions.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RefreshSolutionsCommandUuid.Formatted(GuidExtensions.GuidFormat.WithHyphens));
+			//arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, new[] { @"F:\ISI\Internal Projects\ISI.Cake.Addin" });
+
+			arguments = new ISI.Extensions.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Cake.ExecuteTargetCommandUuid.Formatted(GuidExtensions.GuidFormat.WithHyphens));
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, new[] { @"F:\ISI\Internal Projects\ISI.FileExplorer.Extensions\src\build.cake" });
+			//arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, new[] { @"F:\ISI\Internal Projects\ISI.Cake.Addin" });
 #endif
 
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
