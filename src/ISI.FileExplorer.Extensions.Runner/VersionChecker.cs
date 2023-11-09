@@ -51,7 +51,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 		{
 			var updateStarted = false;
 #if DEBUG
-			return true;
+			//return true;
 #endif
 
 			LastCheckedDateTimeUtc = FileExplorerSettings.GetLastCheckedDateTimeUtc() ?? DateTime.MinValue;
