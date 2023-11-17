@@ -200,46 +200,46 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ISI.Extensions">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Cake">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.DependencyInjection.Iunq">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Git">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins.Forms">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.JsonSerialization.Newtonsoft">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Nuget">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Nuget.Forms">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Scm">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Svn">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio.Forms">
-      <Version>10.0.8714.26217</Version>
+      <Version>10.0.8721.33032</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder">
-      <Version>7.0.4</Version>
+      <Version>8.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
