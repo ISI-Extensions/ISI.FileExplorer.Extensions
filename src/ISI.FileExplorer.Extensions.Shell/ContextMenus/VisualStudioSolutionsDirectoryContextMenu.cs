@@ -88,11 +88,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 			{
 				var menuItem = new System.Windows.Forms.ToolStripMenuItem()
 				{
-					Name = "ISI.FileExplorer.Extensions.Shell.VisualStudioSolutionsDirectoryContextMenu.UpdateNugetPackages",
-					Text = "Update Nuget Packages",
+					Name = "ISI.FileExplorer.Extensions.Shell.VisualStudioSolutionsDirectoryContextMenu.UpgradeNugetPackages",
+					Text = "Upgrade Nuget Packages",
 				};
 
-				menuItem.Click += (sender, args) => UpdateNugetPackagesCommand(this.GetSelectedItemPaths());
+				menuItem.Click += (sender, args) => UpgradeNugetPackagesCommand(this.GetSelectedItemPaths());
 
 				menu.DropDownItems.Add(menuItem);
 			}
@@ -118,9 +118,9 @@ namespace ISI.FileExplorer.Extensions.Shell
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}
 
-		protected void UpdateNugetPackagesCommand(IEnumerable<string> selectedItemPaths)
+		protected void UpgradeNugetPackagesCommand(IEnumerable<string> selectedItemPaths)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Nuget.UpdateNugetPackagesCommandUuid);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Nuget.UpgradeNugetPackagesCommandUuid);
 			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Nuget.ParameterName_SelectedItemPaths, selectedItemPaths);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);

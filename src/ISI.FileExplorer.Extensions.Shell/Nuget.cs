@@ -23,7 +23,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 {
 	public class Nuget
 	{
-		public static Guid UpdateNugetPackagesCommandUuid = Guid.Parse("e664e29d-e319-475e-8922-e9a8280bd6b1");
+		public static Guid UpgradeNugetPackagesCommandUuid = Guid.Parse("e664e29d-e319-475e-8922-e9a8280bd6b1");
 		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
 		public static string[] DefaultExcludePathFilters => new[]

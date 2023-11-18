@@ -25,11 +25,11 @@ using Microsoft.Extensions.Logging;
 namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
 	[ExecuteCommand]
-	public class UpdateNugetPackages_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
+	public class UpgradeNugetPackages_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
 		public bool Handles(Guid commandUuid)
 		{
-			return (commandUuid == ISI.FileExplorer.Extensions.Shell.Nuget.UpdateNugetPackagesCommandUuid);
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.Nuget.UpgradeNugetPackagesCommandUuid);
 		}
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
@@ -38,7 +38,7 @@ namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
 
-				return ISI.Extensions.Nuget.Forms.UpdateNugetPackages.CreateForm(selectedItemPaths, true);
+				return ISI.Extensions.Nuget.Forms.UpgradeNugetPackages.CreateForm(selectedItemPaths, true);
 			}
 
 			return null;
