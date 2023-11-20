@@ -44,9 +44,15 @@ If you right click on any folder(s) with a "*.sln" file nested within them (Be c
 
 ![](Artwork/VisualStudioSolutionsRefreshSolutions.png)
 
-Pick Solutions and options
+Pick Solutions
 
 ![](Artwork/VisualStudioSolutionsRefreshSolutionsSelector.png)
+
+Click "Refresh"
+
+Pick Options
+
+![](Artwork/VisualStudioSolutionsRefreshSolutionsOptions.png)
 
 
 
@@ -56,9 +62,33 @@ If you right click on any folder(s) with a "*.sln" file nested within them (Be c
 
 ![](Artwork/VisualStudioSolutionsRunServices.png)
 
-Pick Solutions and options
+Pick Solutions
 
 ![](Artwork/VisualStudioSolutionsRunServicesSelector.png)
+
+Click "Start"
+
+Pick Options
+
+![](Artwork/VisualStudioSolutionsRunServicesOptions.png)
+
+
+
+* Upgrade Nuget Packages
+
+If you right click on any folder(s) with a "*.sln" file nested within them (Be careful you can end up opening a large number of solutions)
+
+![](Artwork/VisualStudioSolutionsUpgradeNugetPackages.png)
+
+Pick Solutions
+
+![](Artwork/VisualStudioSolutionsUpgradeNugetPackagesSelector.png)
+
+Click "Upgrade"
+
+Pick Options
+
+![](Artwork/VisualStudioSolutionsUpgradeNugetPackagesOptions.png)
 
 
 
