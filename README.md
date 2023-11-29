@@ -1,6 +1,6 @@
 # ISI.FileExplorer.Extensions
 
-Download from https://www.isi-net.com/file-store/download/6cee4d35-449c-409a-8b46-c0c3ed066323/ISI.FileExplorer.Extensions.msi
+Download from [ISI.FileExplorer.Extensions.msi](https://www.isi-net.com/file-store/download/6cee4d35-449c-409a-8b46-c0c3ed066323/ISI.FileExplorer.Extensions.msi)
 
 ### File Icons
 
