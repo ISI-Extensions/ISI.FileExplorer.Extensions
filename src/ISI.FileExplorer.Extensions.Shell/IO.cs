@@ -23,19 +23,18 @@ namespace ISI.FileExplorer.Extensions.Shell
 {
 	internal class IO
 	{
-		public static bool CheckForExistence(string path, string searchPattern, string[] ignorePatterns, int maxDepth = int.MaxValue)
+		public static bool CheckForExistence(string path, string searchPattern, string[] ignorePatterns, int maxDepth = int.MaxValue, Func<string, bool> filter = null)
 		{
-			return EnumerateFiles(path, searchPattern, ignorePatterns, 0, maxDepth, true).Any();
+			return EnumerateFiles(path, searchPattern, ignorePatterns, 0, maxDepth, true, filter).Any();
+		}
+
+		public static IEnumerable<string> EnumerateFiles(string path, string searchPattern, string[] ignorePatterns, int maxDepth = int.MaxValue, Func<string, bool> filter = null)
+		{
+			return EnumerateFiles(path, searchPattern, ignorePatterns, 0, maxDepth, false, filter);
 		}
 
 
-		public static IEnumerable<string> EnumerateFiles(string path, string searchPattern, string[] ignorePatterns, int maxDepth = int.MaxValue)
-		{
-			return EnumerateFiles(path, searchPattern, ignorePatterns, 0, maxDepth, false);
-		}
-
-
-		private static IEnumerable<string> EnumerateFiles(string path, string searchPattern, string[] ignorePatterns, int depth, int maxDepth, bool stopIfFound)
+		private static IEnumerable<string> EnumerateFiles(string path, string searchPattern, string[] ignorePatterns, int depth, int maxDepth, bool stopIfFound, Func<string, bool> filter = null)
 		{
 			if (depth >= maxDepth)
 			{
@@ -73,18 +72,20 @@ namespace ISI.FileExplorer.Extensions.Shell
 					}
 				}
 
-				return EnumerateFiles(path, searchPattern, filters.ToArray(), depth + 1, maxDepth, stopIfFound);
+				return EnumerateFiles(path, searchPattern, filters.ToArray(), depth + 1, maxDepth, stopIfFound, filter);
 			}
 
-			return EnumerateFiles(path, searchPattern, Array.Empty<Func<string, bool>>(), depth + 1, maxDepth, stopIfFound);
+			return EnumerateFiles(path, searchPattern, Array.Empty<Func<string, bool>>(), depth + 1, maxDepth, stopIfFound, filter);
 		}
 
-		private static IEnumerable<string> EnumerateFiles(string path, string searchPattern, Func<string, bool>[] ignorePatterns, int depth, int maxDepth, bool stopIfFound)
+		private static IEnumerable<string> EnumerateFiles(string path, string searchPattern, Func<string, bool>[] ignorePatterns, int depth, int maxDepth, bool stopIfFound, Func<string, bool> filter = null)
 		{
 			if (depth >= maxDepth)
 			{
 				return Array.Empty<string>();
 			}
+			
+			filter ??= _ => true;
 
 			var fileNames = new System.Collections.Concurrent.ConcurrentBag<string>();
 
@@ -92,7 +93,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 			if (string.IsNullOrWhiteSpace(searchPattern))
 			{
-				foreach (var fileInfo in pathInfo.GetFiles().Where(fileInfo => !ignorePatterns.Any(ignorePattern => ignorePattern(fileInfo.Name))))
+				foreach (var fileInfo in pathInfo.GetFiles().Where(fileInfo => filter(fileInfo.FullName) && !ignorePatterns.Any(ignorePattern => ignorePattern(fileInfo.Name))))
 				{
 					fileNames.Add(fileInfo.FullName);
 
@@ -104,7 +105,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			}
 			else
 			{
-				foreach (var fileInfo in pathInfo.GetFiles(searchPattern, System.IO.SearchOption.TopDirectoryOnly).Where(fileInfo => !ignorePatterns.Any(ignorePattern => ignorePattern(fileInfo.Name))))
+				foreach (var fileInfo in pathInfo.GetFiles(searchPattern, System.IO.SearchOption.TopDirectoryOnly).Where(fileInfo => filter(fileInfo.FullName) && !ignorePatterns.Any(ignorePattern => ignorePattern(fileInfo.Name))))
 				{
 					fileNames.Add(fileInfo.FullName);
 
@@ -151,7 +152,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 				}
 			}
 
-			return fileNames;
+			return fileNames.Where(filter);
 		}
 	}
 }

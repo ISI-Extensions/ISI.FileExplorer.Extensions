@@ -25,20 +25,20 @@ using Microsoft.Extensions.Logging;
 namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
 	[ExecuteCommand]
-	public class RefreshSolutions_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
+	public class VisualStudioCodeRefreshSolutions_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
 		public bool Handles(Guid commandUuid)
 		{
-			return (commandUuid == ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.RefreshSolutionsCommandUuid);
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.VisualStudioCodeSolutions.RefreshSolutionsCommandUuid);
 		}
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
 		{
-			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.ParameterName_SelectedItemPaths, out var selectedItemPaths))
+			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.VisualStudioCodeSolutions.ParameterName_SelectedItemPaths, out var selectedItemPaths))
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
 
-				return ISI.Extensions.VisualStudio.Forms.RefreshSolutions.CreateForm(selectedItemPaths, true);
+				return ISI.Extensions.VisualStudioCode.Forms.RefreshSolutions.CreateForm(selectedItemPaths, true);
 			}
 
 			return null;
