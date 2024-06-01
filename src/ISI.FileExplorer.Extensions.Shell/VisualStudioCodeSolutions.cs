@@ -31,10 +31,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 			".vs",
 			".git",
 			".svn",
-			".vscode",
+			".nuget",
 			"obj",
 			"Resources",
-			"node_moduules",
+			"packages",
+			"node_modules",
 			"_ReSharper.Caches",
 		};
 

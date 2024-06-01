@@ -33,9 +33,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 			".git",
 			".svn",
 			".nuget",
+			"bin",
 			"obj",
 			"Resources",
 			"packages",
+			"node_modules",
 			"_ReSharper.Caches",
 		};
 
