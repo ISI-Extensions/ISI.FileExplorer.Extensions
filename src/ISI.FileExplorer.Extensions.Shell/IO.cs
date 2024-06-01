@@ -130,7 +130,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 						},
 						directoryInfo =>
 						{
-							foreach (var fileName in EnumerateFiles(directoryInfo.FullName, searchPattern, ignorePatterns, depth + 1, maxDepth, stopIfFound))
+							foreach (var fileName in EnumerateFiles(directoryInfo.FullName, searchPattern, ignorePatterns, depth + 1, maxDepth, stopIfFound, filter))
 							{
 								fileNames.Add(fileName);
 

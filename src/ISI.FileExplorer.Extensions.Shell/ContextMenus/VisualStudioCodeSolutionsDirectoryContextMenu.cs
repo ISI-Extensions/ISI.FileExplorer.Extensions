@@ -41,7 +41,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			{
 				if (System.IO.Directory.Exists(directory))
 				{
-					if (ISI.FileExplorer.Extensions.Shell.IO.CheckForExistence(directory, "package.json", ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.DefaultExcludePathFilters, ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.MaxCheckDirectoryDepth))
+					if (ISI.FileExplorer.Extensions.Shell.IO.CheckForExistence(directory, "package.json", ISI.FileExplorer.Extensions.Shell.VisualStudioCodeSolutions.DefaultExcludePathFilters, ISI.FileExplorer.Extensions.Shell.VisualStudioSolutions.MaxCheckDirectoryDepth))
 					{
 						return true;
 					}
