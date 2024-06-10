@@ -113,3 +113,4 @@ UpgradeLog*.XML
 /Nuget
 /src/ISI.FileExplorer.Extensions.Runner/.vs
 /src/ISI.FileExplorer.Extensions.Shell/.vs
+/tools/Addins
