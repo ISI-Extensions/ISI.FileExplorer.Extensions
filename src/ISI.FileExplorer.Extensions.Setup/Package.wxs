@@ -17,7 +17,7 @@
 		</Upgrade>
 
 		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="deferred" Return="check" Impersonate="no" />
-		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://git.isi-net.com/ISI/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
+		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
 		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="deferred" Return="check" Impersonate="no" />
 		
 		<InstallExecuteSequence>
