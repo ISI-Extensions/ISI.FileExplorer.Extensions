@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISI.FileExplorer.Extensions
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E9B3FF52-EC62-4829-B698-BEAAB30F3990}"
 	ProjectSection(SolutionItems) = preProject
-		build.cake = build.cake
+		..\build.cake = ..\build.cake
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISI.FileExplorer.Extensions.Shell", "ISI.FileExplorer.Extensions.Shell\ISI.FileExplorer.Extensions.Shell.csproj", "{2A6FB40E-E373-4B23-AE2B-92CA1C000D92}"

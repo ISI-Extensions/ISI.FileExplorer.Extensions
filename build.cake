@@ -8,9 +8,9 @@ var settings = GetSettings(settingsFullName);
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var solutionFile = File("./ISI.FileExplorer.Extensions.sln");
+var solutionFile = File("./src/ISI.FileExplorer.Extensions.sln");
 var solution = ParseSolution(solutionFile);
-var rootProjectFile = File("./ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj");
+var rootProjectFile = File("./src/ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj");
 var rootAssemblyVersionKey = "ISI.FileExplorer.Extensions";
 var artifactName = "ISI.FileExplorer.Extensions";
 var setupBuildArtifactName = "ISI.FileExplorer.Extensions.Setup";
@@ -26,7 +26,7 @@ var buildDateTimeStampVersion = new ISI.Extensions.Scm.DateTimeStampVersion(buil
 
 Information("BuildDateTimeStampVersion: {0}", buildDateTimeStampVersion);
 
-var buildArtifactMsiFile = File(string.Format("../Publish/{0}.{1}.msi", artifactName, buildDateTimeStamp));
+var buildArtifactMsiFile = File(string.Format("./Publish/{0}.{1}.msi", artifactName, buildDateTimeStamp));
 
 Task("Clean")
 	.Does(() =>
@@ -58,7 +58,7 @@ Task("Build")
 	{
 		SetAssemblyVersionFiles(assemblyVersions);
 
-		var productWxsFile = File("./ISI.FileExplorer.Extensions.Setup/Package.wxs");
+		var productWxsFile = File("./src/ISI.FileExplorer.Extensions.Setup/Package.wxs");
 		var productWxsContent = FileReadText(productWxsFile);
 
 		try
@@ -93,7 +93,7 @@ Task("Sign")
 	{
 		if (configuration.Equals("Release"))
 		{
-			var files = GetFiles("./ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi");
+			var files = GetFiles("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi");
 
 			if(files.Any())
 			{
@@ -139,10 +139,10 @@ Task("Package")
 	{
 		CreateDirectory(buildArtifactMsiFile.Path.GetDirectory().FullPath);
 
-		FileWriteText(File(string.Format("../Publish/{0}.Current.Version.txt", artifactName)), assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
+		FileWriteText(File(string.Format("./Publish/{0}.Current.Version.txt", artifactName)), assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
 		
-		CopyFile(File("./ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), buildArtifactMsiFile);
-		CopyFile(File("./ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), File(string.Format("../Publish/{0}.msi", artifactName)));
+		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), buildArtifactMsiFile);
+		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), File(string.Format("./Publish/{0}.msi", artifactName)));
 
 		DeleteAgedPackages(new ISI.Cake.Addin.PackageComponents.DeleteAgedPackagesRequest()
 		{
