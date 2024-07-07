@@ -39,7 +39,14 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 			var configurationDirectory = System.IO.Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "ISI.Extensions");
 
-			System.IO.Directory.CreateDirectory(configurationDirectory);
+			try
+			{
+				System.IO.Directory.CreateDirectory(configurationDirectory);
+			}
+			catch (Exception exception)
+			{
+				throw new Exception($"Could not create directory \"{configurationDirectory}\"", exception);
+			}
 
 			SettingsFileName = System.IO.Path.Combine(configurationDirectory, "fileExplorer.settings.json");
 		}

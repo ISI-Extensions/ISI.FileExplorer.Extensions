@@ -38,7 +38,14 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 		public VersionChecker()
 		{
-			ServiceProvider.Initialize();
+			try
+			{
+				ServiceProvider.Initialize();
+			}
+			catch (Exception exception)
+			{
+				throw new Exception($"Could not create \"ServiceProvider.Initialize()\"", exception);
+			}
 
 			Logger = ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
 
@@ -51,7 +58,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 		{
 			var updateStarted = false;
 #if DEBUG
-			return true;
+			//return true;
 #endif
 
 			LastCheckedDateTimeUtc = FileExplorerSettings.GetLastCheckedDateTimeUtc() ?? DateTime.MinValue;
