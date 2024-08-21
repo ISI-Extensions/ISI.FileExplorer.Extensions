@@ -32,11 +32,29 @@ namespace ISI.FileExplorer.Extensions.Runner
 		private static VersionChecker _current = null;
 		public static VersionChecker Current => _current ??= new VersionChecker();
 
-		protected Microsoft.Extensions.Logging.ILogger Logger { get; }
+		protected Microsoft.Extensions.Logging.ILogger Logger { get; set; }
 
-		protected FileExplorerSettings FileExplorerSettings { get; }
+		protected FileExplorerSettings FileExplorerSettings { get; set; }
 
-		public VersionChecker()
+		//public VersionChecker()
+		//{
+		//	try
+		//	{
+		//		ServiceProvider.Initialize();
+		//	}
+		//	catch (Exception exception)
+		//	{
+		//		throw new Exception($"Could not create \"ServiceProvider.Initialize()\"", exception);
+		//	}
+
+		//	Logger = ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
+
+		//	FileExplorerSettings = new FileExplorerSettings();
+		//}
+
+		private DateTime? LastCheckedDateTimeUtc = null;
+
+		public bool CheckForUpdate(bool forceCheck = false)
 		{
 			try
 			{
@@ -47,15 +65,21 @@ namespace ISI.FileExplorer.Extensions.Runner
 				throw new Exception($"Could not create \"ServiceProvider.Initialize()\"", exception);
 			}
 
-			Logger = ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
+			Logger ??= ISI.Extensions.ServiceLocator.Current.GetService<Microsoft.Extensions.Logging.ILogger>();
 
-			FileExplorerSettings = new FileExplorerSettings();
-		}
+			try
+			{
+				FileExplorerSettings ??= new FileExplorerSettings();
+			}
+			catch (Exception exception)
+			{
+				throw new Exception($"Could not create \"FileExplorerSettings\"", exception);
+			}
 
-		private DateTime? LastCheckedDateTimeUtc = null;
 
-		public bool CheckForUpdate(bool forceCheck = false)
-		{
+
+
+
 			var updateStarted = false;
 #if DEBUG
 			//return true;
