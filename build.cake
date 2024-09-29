@@ -68,8 +68,9 @@ Task("Build")
 			var getSignAssemblyCommandResponse = GetSignAssemblyCommand(new ISI.Cake.Addin.CodeSigning.GetSignAssemblyCommandUsingSettingsRequest()
 			{
 				Settings = settings,
+				UseShortPathName = true,
 			});
-
+			
 			MSBuild(solutionFile, configurator => configurator
 				.SetConfiguration(configuration)
 				.WithProperty("Platform", "x64")
