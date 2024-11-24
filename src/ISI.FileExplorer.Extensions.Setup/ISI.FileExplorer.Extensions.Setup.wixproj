@@ -1,51 +1,11 @@
-﻿<Project>
-  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.1" />
-  <PropertyGroup>
-    <OutputName>ISI.FileExplorer.Extensions</OutputName>
-    <InstallerPlatform>$(Platform)</InstallerPlatform>
-    <BinDirectory>..\ISI.FileExplorer.Extensions.Runner\bin\$(Configuration)</BinDirectory>
-    <!--<BinDirectory>..\ISI.FileExplorer.Extensions.Runner\bin\$(Platform)\$(Configuration)</BinDirectory>-->
-    <DefineConstants>$(DefineConstants);ISI.FileExplorer.Extensions.Runner.BinDirectory=$(BinDirectory)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <!--<OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>-->
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
   <ItemGroup>
     <Content Include="Lantern.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.Heat" Version="4.0.6" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.6" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
   </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.1" />
-  <PropertyGroup>
-    <PreBuildEvent />
-  </PropertyGroup>
-  <Target Name="BeforeBuild">
-    <ItemGroup>
-      <HarvestDirectory Include="$(BinDirectory)">
-        <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
-        <SuppressRootDirectory>true</SuppressRootDirectory>
-        <SuppressCom>true</SuppressCom>
-        <SuppressRegistry>true</SuppressRegistry>
-        <ComponentGroupName>ProductComponentsGroup</ComponentGroupName>
-        <PreprocessorVariable>var.ISI.FileExplorer.Extensions.Runner.BinDirectory</PreprocessorVariable>
-      </HarvestDirectory>
-    </ItemGroup>
-  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj" />
+  </ItemGroup>
 </Project>

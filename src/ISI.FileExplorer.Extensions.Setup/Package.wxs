@@ -1,17 +1,20 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-	<Package Name="ISI.FileExplorer.Extensions" Language="1033" Version="3.0.0.0" Manufacturer="Integrated Solutions, Inc." UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7" InstallerVersion="200">
+	<Package Name="ISI.FileExplorer.Extensions" Manufacturer="Integrated Solutions, Inc." Version="3.0.0.0" UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7">
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
 		<Feature Id="ProductFeature" Title="ISI.FileExplorer.Extensions" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
-			<ComponentGroupRef Id="ProductComponentsGroup" />
-			<ComponentRef Id="ApplicationShortcut" />
+			<ComponentGroupRef Id="RegistryComponents" />
 		</Feature>
+		
 		<Icon Id="Lantern.ico" SourceFile="Lantern.ico" />
+
 		<Property Id="ARPPRODUCTICON" Value="Lantern.ico" />
+		
 		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+		
 		<Upgrade Id="84159581-7a82-4e9a-9536-636aec1cca0c">
 			<UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
 		</Upgrade>
@@ -45,21 +48,24 @@
 
 		<UIRef Id="WixUI_Common" />
 	</Package>
-
+	
 	<Fragment>
-		<StandardDirectory Id="ProgramFiles64Folder">
-			<Directory Id="IntegratedSolutionsIncFolder" Name="Integrated Solutions Inc">
-				<Directory Id="INSTALLFOLDER" Name="ISI.FileExplorer.Extensions" />
+		<StandardDirectory Id="ProgramFiles6432Folder">
+			<Directory Id="ManufacturerFolder" Name="!(bind.Property.Manufacturer)">
+				<Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)" />
 			</Directory>
-		</StandardDirectory>
-		<StandardDirectory Id="ProgramMenuFolder">
-			<Directory Id="ApplicationProgramsFolder" Name="ISI.FileExplorer.Extensions" />
 		</StandardDirectory>
 	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<ComponentRef Id="ApplicationShortcut" />
+			<Files Include="$(ISI.FileExplorer.Extensions.Runner.TargetDir)**">
+				<Exclude Files="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe" />
+			</Files>
+			<Component Id="AppExecutable" Bitness="always64">            
+				<File Id="AppExecutable" Source="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe"/>   
+				<Shortcut Name="ISI.FileExplorer.Extensions - Check For Update" Directory="ProgramMenuFolder" Advertise="yes" Icon="Lantern.ico"/>
+			</Component>
 		</ComponentGroup>
 	</Fragment>
 
@@ -77,16 +83,5 @@
 				<RegistryValue Root="HKCR" Key=".csless\shellex\IconHandler" Type="string" Value="{33b981e3-5a5c-4ca9-8656-87aa0bfeb90d}" />
 			</Component>
 		</ComponentGroup>
-	</Fragment>
-
-	<Fragment>
-		<DirectoryRef Id="ApplicationProgramsFolder">
-			<Component Id="ApplicationShortcut" Guid="c202d48d-8d1b-47d1-abc7-e7c6fa6b0c43">
-				<Shortcut Id="ISI.FileExplorer.Extensions.Start.Menu.Shortcut" Name="Check For Update" Icon="Lantern.ico" Target="[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe" Arguments="versionChecker" WorkingDirectory="INSTALLFOLDER" />
-				<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-				<RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
-				<RegistryValue Root="HKCU" Key="Software\Integrated Solutions Inc\ISI.FileExplorer.Extensions" Name="installed" Type="integer" Value="1" KeyPath="yes" />
-			</Component>
-		</DirectoryRef>
 	</Fragment>
 </Wix>

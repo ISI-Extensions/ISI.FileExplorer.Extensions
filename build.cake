@@ -94,7 +94,7 @@ Task("Sign")
 	{
 		if (configuration.Equals("Release"))
 		{
-			var files = GetFiles("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi");
+			var files = GetFiles("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/en-US/ISI.FileExplorer.Extensions.msi");
 
 			if(files.Any())
 			{
@@ -142,8 +142,8 @@ Task("Package")
 
 		FileWriteText(File(string.Format("./Publish/{0}.Current.Version.txt", artifactName)), assemblyVersions[rootAssemblyVersionKey].AssemblyVersion);
 		
-		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), buildArtifactMsiFile);
-		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/ISI.FileExplorer.Extensions.msi"), File(string.Format("./Publish/{0}.msi", artifactName)));
+		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/en-US/ISI.FileExplorer.Extensions.Setup.msi"), buildArtifactMsiFile);
+		CopyFile(File("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/en-US/ISI.FileExplorer.Extensions.Setup.msi"), File(string.Format("./Publish/{0}.msi", artifactName)));
 
 		DeleteAgedPackages(new ISI.Cake.Addin.PackageComponents.DeleteAgedPackagesRequest()
 		{
