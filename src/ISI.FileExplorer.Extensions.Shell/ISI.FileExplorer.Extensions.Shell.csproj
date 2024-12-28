@@ -38,7 +38,10 @@
     <Compile Include="..\ISI.FileExplorer.Extensions.Version.cs">
       <Link>Properties\ISI.FileExplorer.Extensions.Version.cs</Link>
     </Compile>
+    <Compile Include="Ant.cs" />
+    <Compile Include="ContextMenus\AntBuildFileContextMenu.cs" />
     <Compile Include="ContextMenus\VisualStudioCodeSolutionsDirectoryContextMenu.cs" />
+    <Compile Include="Extensions\XElementExtensions.cs" />
     <Compile Include="NodeModules.cs" />
     <Compile Include="Nuget.cs" />
     <Compile Include="VisualStudioCodeSolutions.cs" />
@@ -84,6 +87,8 @@
     <Compile Include="ContextMenus\VisualStudioSolutionsDirectoryContextMenu.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Artwork\Ant-16x16.png" />
+    <Content Include="Artwork\Ant.ico" />
     <Content Include="Artwork\AssemblyNameBindingRedirect.ico" />
     <Content Include="Artwork\Cake-16x16.png" />
     <Content Include="Artwork\Cake.ico" />

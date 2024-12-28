@@ -28,6 +28,16 @@ namespace ISI.FileExplorer.Extensions.Shell
 				return string.Format("{0}Artwork.", T4Resources._root());
 			}
 		
+			public static readonly string Ant_16x16_png = _root() + "Ant-16x16.png";
+			public static System.IO.Stream GetAnt_16x16_pngStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(Ant_16x16_png);
+			}
+			public static readonly string Ant_ico = _root() + "Ant.ico";
+			public static System.IO.Stream GetAnt_icoStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(Ant_ico);
+			}
 			public static readonly string AssemblyNameBindingRedirect_ico = _root() + "AssemblyNameBindingRedirect.ico";
 			public static System.IO.Stream GetAssemblyNameBindingRedirect_icoStream()
 			{

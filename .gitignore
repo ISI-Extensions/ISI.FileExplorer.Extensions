@@ -114,3 +114,4 @@ UpgradeLog*.XML
 /src/ISI.FileExplorer.Extensions.Runner/.vs
 /src/ISI.FileExplorer.Extensions.Shell/.vs
 /tools
+.vs

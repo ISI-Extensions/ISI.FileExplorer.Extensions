@@ -18,47 +18,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISI.FileExplorer.Extensions.Shell.Extensions;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
-	public  class Cake
+	public  class Ant
 	{
-		public static Guid ExecuteTargetCommandUuid = Guid.Parse("21b0ab6a-3c7b-4dae-b110-b0fdfa31681d");
+		public static Guid ExecuteTargetCommandUuid = Guid.Parse("3039b9e1-83c7-4320-8980-8601c543834a");
 		public const string ParameterName_BuildFileName = "BuildFileName";
 		public const string ParameterName_Target = "Target";
 
-		internal const string CakeFileNameExtension = ".cake";
-		internal const string BuildScriptFileName = "build.cake";
+		internal const string AntFileNameExtension = ".ant";
+		internal const string BuildScriptFileName = "build.ant";
 
 		internal static string[] GetTargetKeysFromBuildScript(string buildScriptFullName)
 		{
-			var rgTargets = new System.Text.RegularExpressions.Regex(@"(?im-snx:.*(?:Task\(\"")(?<target>[\w-]*)(?:\""\)).*)+");
+			var targets = new HashSet<string>();
 
-			var targets = new List<string>();
-
-			var buildCommands = System.IO.File.ReadAllText(buildScriptFullName);
-
-			var matches = rgTargets.Matches(buildCommands);
-
-			foreach (System.Text.RegularExpressions.Match match in matches)
+			try
 			{
-				targets.Add(match.Groups["target"].Value);
+				var antProjectElement = System.Xml.Linq.XElement.Load(buildScriptFullName);
+
+				foreach (var target in antProjectElement.GetElementsByLocalName("target"))
+				{
+					var name = target.GetAttributeByLocalName("name")?.Value ?? string.Empty;
+
+					if (!string.IsNullOrWhiteSpace(name))
+					{
+						targets.Add(name);
+					}
+				}
+			}
+			catch
+			{
 			}
 
 			return targets.ToArray();
-		}
-
-		internal static string GetDefaultTargetKeyFromBuildScript(string buildScriptFullName)
-		{
-			var buildCommands = System.IO.File.ReadAllText(buildScriptFullName);
-
-			var defaultTarget = buildCommands.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(line => line.IndexOf("Argument(\"target\",", StringComparison.InvariantCultureIgnoreCase) >= 0);
-			if (!string.IsNullOrWhiteSpace(defaultTarget))
-			{
-				return defaultTarget.Split(',')[1].Trim(' ', ';', ')', '"');
-			}
-
-			return null;
 		}
 
 		internal static bool IsBuildScriptFile(string buildScriptFullName)

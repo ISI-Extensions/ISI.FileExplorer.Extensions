@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 /*
-Copyright (c) 2018, Integrated Solutions, Inc.
+Copyright (c) 2023, Integrated Solutions, Inc.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -12,7 +12,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
-
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +23,28 @@ using ISI.FileExplorer.Extensions.Shell.Extensions;
 namespace ISI.FileExplorer.Extensions.Shell
 {
 	[System.Runtime.InteropServices.ComVisible(true)]
-	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CakeBuildFile")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
+	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.AntBuildFile")]
+	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Ant.AntFileNameExtension)]
+	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ".build.xml")]
 	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
-	public class CakeBuildFileContextMenu : SharpShell.SharpContextMenu.SharpContextMenu
+	public class AntBuildFileContextMenu : SharpShell.SharpContextMenu.SharpContextMenu
 	{
-		public const string ExtensionUuid = "5e87672e-2deb-45c8-adee-4c8a082dde71";
+		public const string ExtensionUuid = "295cc8b0-0e0e-4e0a-8df7-47adf2a7413f";
 
 		protected override bool CanShowMenu()
 		{
 			var selectedItemPaths = this.GetSelectedItemPaths().ToArray();
 
-			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CakeBuildFile", "GetSelectedItemPaths()", selectedItemPaths);
+			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("AntBuildFile", "GetSelectedItemPaths()", selectedItemPaths);
 
 			if (selectedItemPaths.Length != 1)
 			{
 				return false;
 			}
 
-			var isBuildFile = ISI.FileExplorer.Extensions.Shell.Cake.IsBuildScriptFile(selectedItemPaths.First());
+			var isBuildFile = ISI.FileExplorer.Extensions.Shell.Ant.IsBuildScriptFile(selectedItemPaths.First());
 
-			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CakeBuildFile", "IsBuildFile", string.Format("isBuildFile = {0}", (isBuildFile ? "true" : "false")));
+			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("AntBuildFile", "IsBuildFile", string.Format("isBuildFile = {0}", (isBuildFile ? "true" : "false")));
 
 			return isBuildFile;
 		}
@@ -54,24 +55,22 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 			try
 			{
-				var menu = new System.Windows.Forms.ToolStripMenuItem("CakeBuild")
+				var menu = new System.Windows.Forms.ToolStripMenuItem("AntBuild")
 				{
-					Name = "ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu",
-					Image = System.Drawing.Image.FromStream(T4Resources.Artwork.GetCake_16x16_pngStream()),
+					Name = "ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu",
+					Image = System.Drawing.Image.FromStream(T4Resources.Artwork.GetAnt_16x16_pngStream()),
 					Visible = true,
 				};
 
 				menuStrip.Items.Add(menu);
 
 				var buildFileName = this.GetSelectedItemPaths().First();
-				var activeTargetKeys = new HashSet<string>(ISI.FileExplorer.Extensions.Shell.Cake.GetTargetKeysFromBuildScript(buildFileName), StringComparer.InvariantCultureIgnoreCase);
 
-				if(activeTargetKeys.Contains(ISI.FileExplorer.Extensions.Shell.Cake.GetDefaultTargetKeyFromBuildScript(buildFileName) ?? Guid.NewGuid().ToString()))
 				{
 					var menuItem = new System.Windows.Forms.ToolStripMenuItem()
 					{
-						Name = "ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu.ExecuteDefaultCakeTarget",
-						Text = "Execute Default Cake Target",
+						Name = "ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu.ExecuteDefaultAntTarget",
+						Text = "Execute Default Ant Target",
 						Visible = true,
 					};
 
@@ -81,11 +80,12 @@ namespace ISI.FileExplorer.Extensions.Shell
 				}
 
 				{
+					var activeTargetKeys = ISI.FileExplorer.Extensions.Shell.Ant.GetTargetKeysFromBuildScript(buildFileName);
 					if (activeTargetKeys.Any())
 					{
 						var menuItem = new System.Windows.Forms.ToolStripMenuItem()
 						{
-							Name = "ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu.ExecuteTarget",
+							Name = "ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu.ExecuteTarget",
 							Text = "Execute Target",
 							Visible = true,
 						};
@@ -96,7 +96,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 						{
 							var targetMenuItem = new System.Windows.Forms.ToolStripMenuItem()
 							{
-								Name = string.Format("ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu.ExecuteTarget.{0}", activeTargetKey),
+								Name = string.Format("ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu.ExecuteTarget.{0}", activeTargetKey),
 								Text = activeTargetKey,
 								Visible = true,
 							};
@@ -110,7 +110,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			}
 			catch (Exception exception)
 			{
-				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CakeBuildFile", "CreateMenu()", exception.ErrorMessageFormatted());
+				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("AntBuildFile", "CreateMenu()", exception.ErrorMessageFormatted());
 
 				throw;
 			}
@@ -120,11 +120,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		protected void ExecuteTargetCommand(string buildFileName, string activeTargetKey = null)
 		{
-			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Cake.ExecuteTargetCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_BuildFileName, buildFileName);
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.Ant.ExecuteTargetCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Ant.ParameterName_BuildFileName, buildFileName);
 			if (!string.IsNullOrWhiteSpace(activeTargetKey))
 			{
-				arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Cake.ParameterName_Target, activeTargetKey);
+				arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.Ant.ParameterName_Target, activeTargetKey);
 			}
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
