@@ -48,7 +48,7 @@ Task("NugetPackageRestore")
 		Information("Restoring Nuget Packages ...");
 		using(GetNugetLock())
 		{
-			NuGetRestore(solutionFile);
+			RestoreNugetPackages(solutionFile);
 		}
 	});
 
