@@ -9,7 +9,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 var solutionFile = File("./src/ISI.FileExplorer.Extensions.sln");
-var solution = ParseSolution(solutionFile);
+var solutionDetails = GetSolutionDetails(solutionFile);
 var rootProjectFile = File("./src/ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj");
 var rootAssemblyVersionKey = "ISI.FileExplorer.Extensions";
 var artifactName = "ISI.FileExplorer.Extensions";
@@ -33,7 +33,7 @@ Task("Clean")
 	{
 		Information("Cleaning Projects ...");
 
-		foreach(var projectPath in new HashSet<string>(solution.Projects.Select(p => p.Path.GetDirectory().ToString())))
+		foreach(var projectPath in new HashSet<string>(solutionDetails.ProjectDetailsSet.Select(project => project.ProjectDirectory)))
 		{
 			Information("Cleaning {0}", projectPath);
 			CleanDirectories(projectPath + "/**/bin/" + configuration);
