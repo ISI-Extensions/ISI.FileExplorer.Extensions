@@ -1,9 +1,9 @@
-﻿<Project Sdk="WixToolset.Sdk/5.0.2">
+﻿<Project Sdk="WixToolset.Sdk/6.0.1">
   <ItemGroup>
     <Content Include="Lantern.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj" />
