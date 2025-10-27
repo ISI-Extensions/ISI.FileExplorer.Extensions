@@ -8,7 +8,7 @@ var settings = GetSettings(settingsFullName);
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var solutionFile = File("./src/ISI.FileExplorer.Extensions.sln");
+var solutionFile = File("./src/ISI.FileExplorer.Extensions.slnx");
 var solutionDetails = GetSolutionDetails(solutionFile);
 var rootProjectFile = File("./src/ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj");
 var rootAssemblyVersionKey = "ISI.FileExplorer.Extensions";

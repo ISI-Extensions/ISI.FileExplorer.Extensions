@@ -1,0 +1,23 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/build/">
+    <File Path="../build.cake" />
+  </Folder>
+  <Project Path="ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+  <Project Path="ISI.FileExplorer.Extensions.Setup/ISI.FileExplorer.Extensions.Setup.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
+    <BuildDependency Project="ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj" />
+    <BuildDependency Project="ISI.FileExplorer.Extensions.Shell/ISI.FileExplorer.Extensions.Shell.csproj" />
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Build Solution="Debug|Any CPU" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+  </Project>
+  <Project Path="ISI.FileExplorer.Extensions.Shell.Tests/ISI.FileExplorer.Extensions.Shell.Tests.csproj" />
+  <Project Path="ISI.FileExplorer.Extensions.Shell/ISI.FileExplorer.Extensions.Shell.csproj" />
+</Solution>

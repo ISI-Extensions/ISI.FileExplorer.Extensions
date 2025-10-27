@@ -3,7 +3,7 @@
     <Content Include="Lantern.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.1" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj" />
