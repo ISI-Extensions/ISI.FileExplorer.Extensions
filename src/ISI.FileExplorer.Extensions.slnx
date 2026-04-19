@@ -8,7 +8,7 @@
   <Folder Name="/build/">
     <File Path="../build.cake" />
   </Folder>
-  <Project Path="ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj">
+  <Project Path="ISI.FileExplorer.Extensions.Runner/ISI.FileExplorer.Extensions.Runner.csproj" Id="2cc3576f-a2b8-4ca1-bf2e-dd3c8b3c661f">
     <Platform Solution="Debug|x64" Project="x64" />
   </Project>
   <Project Path="ISI.FileExplorer.Extensions.Setup/ISI.FileExplorer.Extensions.Setup.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
@@ -18,6 +18,6 @@
     <Build Solution="Debug|Any CPU" Project="false" />
     <Build Solution="Debug|x64" Project="false" />
   </Project>
-  <Project Path="ISI.FileExplorer.Extensions.Shell.Tests/ISI.FileExplorer.Extensions.Shell.Tests.csproj" />
-  <Project Path="ISI.FileExplorer.Extensions.Shell/ISI.FileExplorer.Extensions.Shell.csproj" />
+  <Project Path="ISI.FileExplorer.Extensions.Shell.Tests/ISI.FileExplorer.Extensions.Shell.Tests.csproj" Id="21a1c9bc-9a04-41f6-8544-4adbda688032" />
+  <Project Path="ISI.FileExplorer.Extensions.Shell/ISI.FileExplorer.Extensions.Shell.csproj" Id="2a6fb40e-e373-4b23-ae2b-92ca1c000d92" />
 </Solution>
