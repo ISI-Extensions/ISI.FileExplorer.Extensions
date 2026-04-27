@@ -38,7 +38,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			if (depth >= maxDepth)
 			{
-				return Array.Empty<string>();
+				return [];
 			}
 
 			if ((ignorePatterns != null) && ignorePatterns.Any())
@@ -82,7 +82,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			if (depth >= maxDepth)
 			{
-				return Array.Empty<string>();
+				return [];
 			}
 			
 			filter ??= _ => true;

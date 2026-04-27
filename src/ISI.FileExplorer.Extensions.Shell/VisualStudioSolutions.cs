@@ -27,8 +27,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 		public static Guid RunServicesCommandUuid = Guid.Parse("14224238-3274-449b-9cdd-7fa0149826e8");
 		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-		public static string[] DefaultExcludePathFilters => new[]
-		{
+		public static string[] DefaultExcludePathFilters =>
+		[
 			".vs",
 			".git",
 			".svn",
@@ -38,8 +38,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			"Resources",
 			"packages",
 			"node_modules",
-			"_ReSharper.Caches",
-		};
+			"_ReSharper.Caches"
+		];
 
 		public static int MaxCheckDirectoryDepth => 5;
 	}

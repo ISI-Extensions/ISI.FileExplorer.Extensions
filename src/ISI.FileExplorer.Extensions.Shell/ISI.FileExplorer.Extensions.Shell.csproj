@@ -41,10 +41,12 @@
     <Compile Include="Ant.cs" />
     <Compile Include="ContextMenus\AntBuildFileContextMenu.cs" />
     <Compile Include="ContextMenus\VisualStudioCodeSolutionsDirectoryContextMenu.cs" />
+    <Compile Include="ContextMenus\CreateSolutionFromTemplateDirectoryContextMenu.cs" />
     <Compile Include="Extensions\XElementExtensions.cs" />
     <Compile Include="NodeModules.cs" />
     <Compile Include="Nuget.cs" />
     <Compile Include="VisualStudioCodeSolutions.cs" />
+    <Compile Include="SolutionManager.cs" />
     <Compile Include="VisualStudioSolutions.cs" />
     <None Include="..\ISI.FileExplorer.Extensions.licenseheader">
       <Link>ISI.FileExplorer.Extensions.licenseheader</Link>

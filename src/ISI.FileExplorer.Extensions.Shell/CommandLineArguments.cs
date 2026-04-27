@@ -36,7 +36,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			Command = command;
 			Parameters = parameters ?? new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
-			Values = new List<string>(values ?? Array.Empty<string>());
+			Values = new List<string>(values ?? []);
 		}
 
 		public CommandLineArguments(string[] args, int originIndex = 0)
@@ -82,7 +82,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 		public void AddParameter(string parameterName, string parameterValue)
 		{
-			AddParameter(parameterName, new[] { parameterValue });
+			AddParameter(parameterName, [parameterValue]);
 		}
 
 		public void AddValue(string value)
@@ -116,7 +116,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			return false;
 		}
 
-		public bool TryGetParameterValues(string parameterName, out string[] parameterValues, string delimiter = ";", bool trimValues = true, bool removeEmptyValues = true) => TryGetParameterValues(parameterName, out parameterValues, new[] { delimiter }, trimValues, removeEmptyValues);
+		public bool TryGetParameterValues(string parameterName, out string[] parameterValues, string delimiter = ";", bool trimValues = true, bool removeEmptyValues = true) => TryGetParameterValues(parameterName, out parameterValues, [delimiter], trimValues, removeEmptyValues);
 
 		public string GetParameterValue(string parameterName, string defaultValue = "")
 		{
@@ -138,7 +138,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 			return defaultValues;
 		}
 
-		public string[] GetParameterValues(string parameterName, string delimiter = ";", bool trimValues = true, bool removeEmptyValues = true, string[] defaultValues = null) => GetParameterValues(parameterName, new[] { delimiter }, trimValues, removeEmptyValues, defaultValues);
+		public string[] GetParameterValues(string parameterName, string delimiter = ";", bool trimValues = true, bool removeEmptyValues = true, string[] defaultValues = null) => GetParameterValues(parameterName, [delimiter], trimValues, removeEmptyValues, defaultValues);
 
 
 

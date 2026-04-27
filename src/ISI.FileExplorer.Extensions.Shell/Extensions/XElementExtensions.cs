@@ -25,7 +25,7 @@ namespace ISI.FileExplorer.Extensions.Shell.Extensions
 	{
 		public static IEnumerable<System.Xml.Linq.XAttribute> GetAttributesByLocalName(this IEnumerable<System.Xml.Linq.XAttribute> xAttributes, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
-			return (xAttributes ?? Array.Empty<System.Xml.Linq.XAttribute>()).Where(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
+			return (xAttributes ?? []).Where(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
 		}
 		public static IEnumerable<System.Xml.Linq.XAttribute> GetAttributesByLocalName(this System.Xml.Linq.XElement xElement, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
@@ -33,7 +33,7 @@ namespace ISI.FileExplorer.Extensions.Shell.Extensions
 		}
 		public static System.Xml.Linq.XAttribute GetAttributeByLocalName(this IEnumerable<System.Xml.Linq.XAttribute> xAttributes, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
-			return (xAttributes ?? Array.Empty<System.Xml.Linq.XAttribute>()).FirstOrDefault(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
+			return (xAttributes ?? []).FirstOrDefault(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
 		}
 		public static System.Xml.Linq.XAttribute GetAttributeByLocalName(this System.Xml.Linq.XElement xElement, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
@@ -42,7 +42,7 @@ namespace ISI.FileExplorer.Extensions.Shell.Extensions
 
 		public static IEnumerable<System.Xml.Linq.XElement> GetElementsByLocalName(this IEnumerable<System.Xml.Linq.XElement> xElements, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
-			return (xElements ?? Array.Empty<System.Xml.Linq.XElement>()).Where(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
+			return (xElements ?? []).Where(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
 		}
 		public static IEnumerable<System.Xml.Linq.XElement> GetElementsByLocalName(this System.Xml.Linq.XElement xElement, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
@@ -50,7 +50,7 @@ namespace ISI.FileExplorer.Extensions.Shell.Extensions
 		}
 		public static System.Xml.Linq.XElement GetElementByLocalName(this IEnumerable<System.Xml.Linq.XElement> xElements, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{
-			return (xElements ?? Array.Empty<System.Xml.Linq.XElement>()).FirstOrDefault(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
+			return (xElements ?? []).FirstOrDefault(attribute => string.Equals(attribute.Name.LocalName, localName, stringComparison));
 		}
 		public static System.Xml.Linq.XElement GetElementByLocalName(this System.Xml.Linq.XElement xElement, string localName, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
 		{

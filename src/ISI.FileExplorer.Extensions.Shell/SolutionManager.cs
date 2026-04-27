@@ -1,4 +1,4 @@
-﻿#region Copyright & License
+#region Copyright & License
 /*
 Copyright (c) 2026, Integrated Solutions, Inc.
 All rights reserved.
@@ -12,7 +12,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
-
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +21,26 @@ using System.Threading.Tasks;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
-	[System.Runtime.InteropServices.ComVisible(true)]
-	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CakeIconHandler")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
-	//[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ".cake")]
-	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
-	public class CakeIconHandler : SharpShell.SharpIconHandler.SharpIconHandler
+	public class SolutionManager
 	{
-		public const string ExtensionUuid = "e590fd47-7dac-464e-8040-ba4efe535e0e";
+		public static Guid CreateSolutionFromTemplateCommandUuid = Guid.Parse("5b95ef0c-888e-4b5b-9dd7-f1e371b1add8");
 
-		protected override System.Drawing.Icon GetIcon(bool smallIcon, uint iconSize)
-		{
-			var icon = new System.Drawing.Icon(T4Resources.Artwork.GetCake_icoStream());
+		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-			return GetIconSpecificSize(icon, new System.Drawing.Size((int)iconSize, (int)iconSize));
-		}
+		public static string[] DefaultExcludePathFilters =>
+		[
+			".vs",
+			".git",
+			".svn",
+			".nuget",
+			"bin",
+			"obj",
+			"Resources",
+			"packages",
+			"node_modules",
+			"_ReSharper.Caches"
+		];
+
+		public static int MaxCheckDirectoryDepth => 5;
 	}
 }

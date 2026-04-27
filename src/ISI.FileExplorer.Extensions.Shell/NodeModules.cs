@@ -26,8 +26,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 		public static Guid UpgradeNodeModulesCommandUuid = Guid.Parse("6a7ddb38-38e0-4abc-8e2f-12dda9001d2b");
 		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-		public static string[] DefaultExcludePathFilters => new[]
-		{
+		public static string[] DefaultExcludePathFilters =>
+		[
 			".vs",
 			".git",
 			".svn",
@@ -35,8 +35,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			"obj",
 			"Resources",
 			"node_moduules",
-			"_ReSharper.Caches",
-		};
+			"_ReSharper.Caches"
+		];
 
 		public static int MaxCheckDirectoryDepth => 5;
 	}

@@ -1,4 +1,4 @@
-﻿#region Copyright & License
+#region Copyright & License
 /*
 Copyright (c) 2026, Integrated Solutions, Inc.
 All rights reserved.
@@ -12,29 +12,36 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
-
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISI.Extensions.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace ISI.FileExplorer.Extensions.Shell
+namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
-	[System.Runtime.InteropServices.ComVisible(true)]
-	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CakeIconHandler")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
-	//[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ".cake")]
-	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
-	public class CakeIconHandler : SharpShell.SharpIconHandler.SharpIconHandler
+	[ExecuteCommand]
+	public class CreateSolutionFromTemplate_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
-		public const string ExtensionUuid = "e590fd47-7dac-464e-8040-ba4efe535e0e";
-
-		protected override System.Drawing.Icon GetIcon(bool smallIcon, uint iconSize)
+		public bool Handles(Guid commandUuid)
 		{
-			var icon = new System.Drawing.Icon(T4Resources.Artwork.GetCake_icoStream());
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.SolutionManager.CreateSolutionFromTemplateCommandUuid);
+		}
 
-			return GetIconSpecificSize(icon, new System.Drawing.Size((int)iconSize, (int)iconSize));
+		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
+		{
+			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPaths, out var selectedItemPaths))
+			{
+				System.Windows.Forms.Application.EnableVisualStyles();
+
+				return ISI.SolutionManager.Forms.CreateSolutionFromTemplate.CreateForm(selectedItemPaths.First());
+			}
+
+			return null;
 		}
 	}
 }

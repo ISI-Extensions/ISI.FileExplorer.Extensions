@@ -18,23 +18,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISI.FileExplorer.Extensions.Shell.Extensions;
 
 namespace ISI.FileExplorer.Extensions.Shell
 {
 	[System.Runtime.InteropServices.ComVisible(true)]
-	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CakeIconHandler")]
-	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Cake.CakeFileNameExtension)]
-	//[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.FileExtension, ".cake")]
+	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.CreateSolutionFromTemplateDirectory")]
+	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.Directory)]
+	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.Class, @"Directory\Background")]
 	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
-	public class CakeIconHandler : SharpShell.SharpIconHandler.SharpIconHandler
+	public class CreateSolutionFromTemplateDirectoryContextMenu : SharpShell.SharpContextMenu.SharpContextMenu
 	{
-		public const string ExtensionUuid = "e590fd47-7dac-464e-8040-ba4efe535e0e";
+		public const string ExtensionUuid = "8bbae049-0f20-449c-bfaf-71774d72f59f";
 
-		protected override System.Drawing.Icon GetIcon(bool smallIcon, uint iconSize)
+		protected override bool CanShowMenu()
 		{
-			var icon = new System.Drawing.Icon(T4Resources.Artwork.GetCake_icoStream());
+			var selectedItemPaths = this.GetSelectedItemPaths().ToArray();
 
-			return GetIconSpecificSize(icon, new System.Drawing.Size((int)iconSize, (int)iconSize));
+			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CreateSolutionFromTemplate", "GetSelectedItemPaths()", selectedItemPaths);
+
+			return true;
+		}
+
+		protected override System.Windows.Forms.ContextMenuStrip CreateMenu()
+		{
+			var menuStrip = new System.Windows.Forms.ContextMenuStrip();
+
+			var menu = new System.Windows.Forms.ToolStripMenuItem("Create Solution From Template")
+			{
+				Name = "ISI.FileExplorer.Extensions.Shell.CreateSolutionFromTemplateDirectoryContextMenu",
+				Image = System.Drawing.Image.FromStream(T4Resources.Artwork.GetLantern_pngStream()),
+			};
+
+			menu.Click += (sender, args) => CreateSolutionFromTemplateCommand(this.GetSelectedItemPaths());
+
+			return menuStrip;
+		}
+
+		protected void CreateSolutionFromTemplateCommand(IEnumerable<string> selectedItemPaths)
+		{
+			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.SolutionManager.CreateSolutionFromTemplateCommandUuid);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPaths, selectedItemPaths);
+
+			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}
 	}
 }

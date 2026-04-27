@@ -26,8 +26,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 		public static Guid RefreshSolutionsCommandUuid = Guid.Parse("8f95d69e-2c7c-4a4b-8671-c1a72ee0862d");
 		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-		public static string[] DefaultExcludePathFilters => new[]
-		{
+		public static string[] DefaultExcludePathFilters =>
+		[
 			".vs",
 			".git",
 			".svn",
@@ -36,8 +36,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			"Resources",
 			"packages",
 			"node_modules",
-			"_ReSharper.Caches",
-		};
+			"_ReSharper.Caches"
+		];
 
 		public static int MaxCheckDirectoryDepth => 5;
 	}

@@ -26,8 +26,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 		public static Guid UpgradeNugetPackagesCommandUuid = Guid.Parse("e664e29d-e319-475e-8922-e9a8280bd6b1");
 		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
 
-		public static string[] DefaultExcludePathFilters => new[]
-		{
+		public static string[] DefaultExcludePathFilters =>
+		[
 			".vs",
 			".git",
 			".svn",
@@ -35,8 +35,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			"obj",
 			"Resources",
 			"packages",
-			"_ReSharper.Caches",
-		};
+			"_ReSharper.Caches"
+		];
 
 		public static int MaxCheckDirectoryDepth => 5;
 	}
