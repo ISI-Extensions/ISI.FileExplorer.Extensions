@@ -70,7 +70,7 @@ Task("Build")
 				Settings = settings,
 				UseShortPathName = true,
 			});
-			
+	
 			MSBuild(solutionFile, configurator => configurator
 				.SetConfiguration(configuration)
 				.WithProperty("Platform", "x64")
@@ -117,8 +117,8 @@ Task("Sign")
 
 					SignAssemblies(new ISI.Cake.Addin.CodeSigning.SignAssembliesUsingSettingsRequest()
 					{
-						AssemblyPaths = tempFiles,
 						Settings = settings,
+						AssemblyPaths = tempFiles,
 					});
 
 					foreach(var file in files)
