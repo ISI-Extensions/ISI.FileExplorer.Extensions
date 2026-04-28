@@ -34,11 +34,11 @@ namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 
 		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
 		{
-			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPaths, out var selectedItemPaths))
+			if (arguments.TryGetParameterValue(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPath, out var selectedItemPath))
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
 
-				return ISI.SolutionManager.Forms.CreateSolutionFromTemplate.CreateForm(selectedItemPaths.First());
+				return ISI.SolutionManager.Forms.CreateSolutionFromTemplate.CreateForm(selectedItemPath);
 			}
 
 			return null;

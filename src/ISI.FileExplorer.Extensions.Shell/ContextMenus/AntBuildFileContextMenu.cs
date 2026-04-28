@@ -44,7 +44,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 			var isBuildFile = ISI.FileExplorer.Extensions.Shell.Ant.IsBuildScriptFile(selectedItemPaths.First());
 
-			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("AntBuildFile", "IsBuildFile", string.Format("isBuildFile = {0}", (isBuildFile ? "true" : "false")));
+			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("AntBuildFile", "IsBuildFile", $"isBuildFile = {(isBuildFile ? "true" : "false")}");
 
 			return isBuildFile;
 		}
@@ -96,7 +96,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 						{
 							var targetMenuItem = new System.Windows.Forms.ToolStripMenuItem()
 							{
-								Name = string.Format("ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu.ExecuteTarget.{0}", activeTargetKey),
+								Name = $"ISI.FileExplorer.Extensions.Shell.AntBuildFileContextMenu.ExecuteTarget.{activeTargetKey}",
 								Text = activeTargetKey,
 								Visible = true,
 							};

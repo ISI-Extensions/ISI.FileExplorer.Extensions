@@ -25,22 +25,6 @@ namespace ISI.FileExplorer.Extensions.Shell
 	{
 		public static Guid CreateSolutionFromTemplateCommandUuid = Guid.Parse("5b95ef0c-888e-4b5b-9dd7-f1e371b1add8");
 
-		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
-
-		public static string[] DefaultExcludePathFilters =>
-		[
-			".vs",
-			".git",
-			".svn",
-			".nuget",
-			"bin",
-			"obj",
-			"Resources",
-			"packages",
-			"node_modules",
-			"_ReSharper.Caches"
-		];
-
-		public static int MaxCheckDirectoryDepth => 5;
+		public const string ParameterName_SelectedItemPath = "SelectedItemPath";
 	}
 }

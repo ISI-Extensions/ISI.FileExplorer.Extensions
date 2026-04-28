@@ -28,7 +28,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 		protected IList<string> Values { get; } = new List<string>();
 
 		public CommandLineArguments(Guid commandUuid, IDictionary<string, string> parameters = null, IEnumerable<string> values = null)
-			: this(string.Format("{0:D}", commandUuid), parameters, values)
+			: this($"{commandUuid:D}", parameters, values)
 		{
 		}
 
@@ -147,8 +147,8 @@ namespace ISI.FileExplorer.Extensions.Shell
 			var arguments = new List<string>();
 
 			arguments.Add(Command);
-			arguments.Add(string.Join(" ", Parameters.Select(parameter => string.Format("\"-{0}\" \"{1}\"", parameter.Key, parameter.Value))));
-			arguments.Add(string.Join(" ", Values.Select(value => string.Format("\"{0}\"", value))));
+			arguments.Add(string.Join(" ", Parameters.Select(parameter => $"\"-{parameter.Key}\" \"{parameter.Value}\"")));
+			arguments.Add(string.Join(" ", Values.Select(value => $"\"{value}\"")));
 
 			var result = string.Join(" ", arguments);
 

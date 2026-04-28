@@ -77,7 +77,6 @@ namespace ISI.FileExplorer.Extensions.Shell
 				};
 
 				menuStrip.Items.Add(menu);
-
 			}
 			catch (Exception exception)
 			{

@@ -75,14 +75,14 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n", DateTime.UtcNow, note));
+				AppendToLog($"{DateTime.UtcNow:u}\t{note}\n");
 			}
 		}
 		public static void AddToLog(IEnumerable<string> notes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n", DateTime.UtcNow, string.Join("\t\n", notes)));
+				AppendToLog($"{DateTime.UtcNow:u}\t{string.Join("\t\n", notes)}\n");
 			}
 		}
 
@@ -92,28 +92,28 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}:\n\t{2}\n", DateTime.UtcNow, section, note));
+				AppendToLog($"{DateTime.UtcNow:u}\t{section}:\n\t{note}\n");
 			}
 		}
 		public static void AddToLog(string section, IEnumerable<string> notes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}:\n\t{2}\n", DateTime.UtcNow, section, string.Join("\t\n", notes)));
+				AppendToLog($"{DateTime.UtcNow:u}\t{section}:\n\t{string.Join("\t\n", notes)}\n");
 			}
 		}
 		public static void AddToLog(IEnumerable<KeyValuePair<string, string>> sectionNotes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\n\t{1}\n", DateTime.UtcNow, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}: {1}", sectionNote.Key, sectionNote.Value)))));
+				AppendToLog($"{DateTime.UtcNow:u}\n\t{string.Join("\n\t", sectionNotes.Select(sectionNote => $"{sectionNote.Key}: {sectionNote.Value}"))}\n");
 			}
 		}
 		public static void AddToLog(IEnumerable<KeyValuePair<string, IEnumerable<string>>> sectionNotes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\n\t{1}\n", DateTime.UtcNow, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}:\n\t\t{1}", sectionNote.Key, string.Join("\n\t\t", sectionNote.Value))))));
+				AppendToLog($"{DateTime.UtcNow:u}\n\t{string.Join("\n\t", sectionNotes.Select(sectionNote => $"{sectionNote.Key}:\n\t\t{string.Join("\n\t\t", sectionNote.Value)}"))}\n");
 			}
 		}
 
@@ -123,28 +123,28 @@ namespace ISI.FileExplorer.Extensions.Shell
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}:\n\t\t{3}\n", DateTime.UtcNow, owner, section, note));
+				AppendToLog($"{DateTime.UtcNow:u}\t{owner}\n\t{section}:\n\t\t{note}\n");
 			}
 		}
 		public static void AddToLog(string owner, string section, IEnumerable<string> notes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}:\n\t\t{3}\n", DateTime.UtcNow, owner, section, string.Join("\t\t\n", notes)));
+				AppendToLog($"{DateTime.UtcNow:u}\t{owner}\n\t{section}:\n\t\t{string.Join("\t\t\n", notes)}\n");
 			}
 		}
 		public static void AddToLog(string owner, IEnumerable<KeyValuePair<string, string>> sectionNotes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}\n", DateTime.UtcNow, owner, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}: {1}", sectionNote.Key, sectionNote.Value)))));
+				AppendToLog($"{DateTime.UtcNow:u}\t{owner}\n\t{string.Join("\n\t", sectionNotes.Select(sectionNote => $"{sectionNote.Key}: {sectionNote.Value}"))}\n");
 			}
 		}
 		public static void AddToLog(string owner, IEnumerable<KeyValuePair<string, IEnumerable<string>>> sectionNotes)
 		{
 			if (ShouldWriteLog())
 			{
-				AppendToLog(string.Format("{0:u}\t{1}\n\t{2}\n", DateTime.UtcNow, owner, string.Join("\n\t", sectionNotes.Select(sectionNote => string.Format("{0}:\n\t\t{1}", sectionNote.Key, string.Join("\n\t\t", sectionNote.Value))))));
+				AppendToLog($"{DateTime.UtcNow:u}\t{owner}\n\t{string.Join("\n\t", sectionNotes.Select(sectionNote => $"{sectionNote.Key}:\n\t\t{string.Join("\n\t\t", sectionNote.Value)}"))}\n");
 			}
 		}
 	}

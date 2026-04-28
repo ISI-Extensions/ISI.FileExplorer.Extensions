@@ -44,7 +44,7 @@ namespace ISI.FileExplorer.Extensions.Runner
 				{
 					if (System.IO.File.Exists(SettingsFileName))
 					{
-						System.IO.File.Move(SettingsFileName, string.Format("{0}.{1}", SettingsFileName, DateTime.UtcNow.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortablePrecise)));
+						System.IO.File.Move(SettingsFileName, $"{SettingsFileName}.{DateTime.UtcNow.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortablePrecise)}");
 					}
 
 					using (var stream = System.IO.File.OpenWrite(SettingsFileName))

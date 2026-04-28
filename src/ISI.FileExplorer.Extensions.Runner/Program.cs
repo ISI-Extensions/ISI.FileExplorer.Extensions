@@ -35,6 +35,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 
 			if (string.Equals(arguments.Command, "install", StringComparison.InvariantCultureIgnoreCase))
 			{
+				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("FileExplorer", "Install");
+
 				Console.WriteLine("install");
 
 				var shellFullName = System.IO.Path.Combine(ISI.Extensions.IO.Path.GetBinDirectory(), "ISI.FileExplorer.Extensions.Shell.dll");
@@ -46,9 +48,13 @@ namespace ISI.FileExplorer.Extensions.Runner
 				var success = registrationType == SharpShell.ServerRegistration.RegistrationType.OS32Bit ? regasm.Register32(shellFullName, true) : regasm.Register64(shellFullName, true);
 
 				Console.WriteLine(success ? "Installed" : "Failed");
+
+				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("FileExplorer", $"Installed ({(success ? "Installed" : "Failed")})");
 			}
 			else if (string.Equals(arguments.Command, "uninstall", StringComparison.InvariantCultureIgnoreCase))
 			{
+				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("FileExplorer", "Uninstall");
+
 				Console.WriteLine("uninstall");
 
 				var shellFullName = System.IO.Path.Combine(ISI.Extensions.IO.Path.GetBinDirectory(), "ISI.FileExplorer.Extensions.Shell.dll");
@@ -60,6 +66,8 @@ namespace ISI.FileExplorer.Extensions.Runner
 				var success = registrationType == SharpShell.ServerRegistration.RegistrationType.OS32Bit ? regasm.Unregister32(shellFullName) : regasm.Unregister32(shellFullName);
 
 				Console.WriteLine(success ? "Uninstalled" : "Failed");
+
+				ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("FileExplorer", $"Uninstalled ({(success ? "Installed" : "Failed")})");
 			}
 			else if (string.Equals(arguments.Command, "versionChecker", StringComparison.InvariantCultureIgnoreCase))
 			{
@@ -102,13 +110,13 @@ namespace ISI.FileExplorer.Extensions.Runner
 		{
 			try
 			{
-				var exception = unhandledExceptionEventArgs.ExceptionObject as Exception ?? new Exception(string.Format("An unhandled exception occurred in this application: {0}", unhandledExceptionEventArgs.ExceptionObject));
+				var exception = unhandledExceptionEventArgs.ExceptionObject as Exception ?? new Exception($"An unhandled exception occurred in this application: {unhandledExceptionEventArgs.ExceptionObject}");
 
 				var directory = @"C:\ProgramData\ISI.FileExplorer.Extensions";
 
 				System.IO.Directory.CreateDirectory(directory);
 
-				System.IO.File.WriteAllText(System.IO.Path.Combine(directory, string.Format("DomainError.{0}.{1:N}.txt", DateTime.Now.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortable), Guid.NewGuid())), exception.ErrorMessageFormatted());
+				System.IO.File.WriteAllText(System.IO.Path.Combine(directory, $"DomainError.{DateTime.Now.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortable)}.{Guid.NewGuid():N}.txt"), exception.ErrorMessageFormatted());
 			}
 			catch
 			{

@@ -37,6 +37,11 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CreateSolutionFromTemplate", "GetSelectedItemPaths()", selectedItemPaths);
 
+			if (selectedItemPaths.Length != 1)
+			{
+				return false;
+			}
+
 			return true;
 		}
 
@@ -50,15 +55,17 @@ namespace ISI.FileExplorer.Extensions.Shell
 				Image = System.Drawing.Image.FromStream(T4Resources.Artwork.GetLantern_pngStream()),
 			};
 
-			menu.Click += (sender, args) => CreateSolutionFromTemplateCommand(this.GetSelectedItemPaths());
+			menu.Click += (sender, args) => CreateSolutionFromTemplateCommand(this.GetSelectedItemPaths().FirstOrDefault());
+
+			menuStrip.Items.Add(menu);
 
 			return menuStrip;
 		}
 
-		protected void CreateSolutionFromTemplateCommand(IEnumerable<string> selectedItemPaths)
+		protected void CreateSolutionFromTemplateCommand(string selectedItemPath)
 		{
 			var arguments = new ISI.FileExplorer.Extensions.Shell.CommandLineArguments(ISI.FileExplorer.Extensions.Shell.SolutionManager.CreateSolutionFromTemplateCommandUuid);
-			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPaths, selectedItemPaths);
+			arguments.AddParameter(ISI.FileExplorer.Extensions.Shell.SolutionManager.ParameterName_SelectedItemPath, selectedItemPath);
 
 			ISI.FileExplorer.Extensions.Shell.Runner.Execute(arguments);
 		}

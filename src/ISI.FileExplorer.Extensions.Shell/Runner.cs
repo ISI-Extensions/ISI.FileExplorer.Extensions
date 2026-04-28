@@ -55,7 +55,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 				{
 					execFileName = Type.GetType("ISI.FileExplorer.Extensions.Runner.T4Resources, ISI.FileExplorer.Extensions.Runner").Assembly.Location;
 
-					ISI.FileExplorer.Extensions.Shell.Logger.AddToLog(string.Format("ISI.FileExplorer.Extensions.Runner.exe found @ \"{0}\" via Runner type", execFileName));
+					ISI.FileExplorer.Extensions.Shell.Logger.AddToLog($"ISI.FileExplorer.Extensions.Runner.exe found @ \"{execFileName}\" via Runner type");
 				}
 			}
 			catch (Exception exception)
@@ -76,7 +76,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 					execFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(execFileName), "ISI.FileExplorer.Extensions.Runner.exe");
 
-					ISI.FileExplorer.Extensions.Shell.Logger.AddToLog(string.Format("ISI.FileExplorer.Extensions.Runner.exe found @ \"{0}\" via type", execFileName));
+					ISI.FileExplorer.Extensions.Shell.Logger.AddToLog($"ISI.FileExplorer.Extensions.Runner.exe found @ \"{execFileName}\" via type");
 				}
 			}
 			catch (Exception exception)

@@ -43,7 +43,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 
 			var isBuildFile = ISI.FileExplorer.Extensions.Shell.Cake.IsBuildScriptFile(selectedItemPaths.First());
 
-			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CakeBuildFile", "IsBuildFile", string.Format("isBuildFile = {0}", (isBuildFile ? "true" : "false")));
+			ISI.FileExplorer.Extensions.Shell.Logger.AddToLog("CakeBuildFile", "IsBuildFile", $"isBuildFile = {(isBuildFile ? "true" : "false")}");
 
 			return isBuildFile;
 		}
@@ -96,7 +96,7 @@ namespace ISI.FileExplorer.Extensions.Shell
 						{
 							var targetMenuItem = new System.Windows.Forms.ToolStripMenuItem()
 							{
-								Name = string.Format("ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu.ExecuteTarget.{0}", activeTargetKey),
+								Name = $"ISI.FileExplorer.Extensions.Shell.CakeBuildFileContextMenu.ExecuteTarget.{activeTargetKey}",
 								Text = activeTargetKey,
 								Visible = true,
 							};
