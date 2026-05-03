@@ -40,9 +40,12 @@
     </Compile>
     <Compile Include="Ant.cs" />
     <Compile Include="ContextMenus\AntBuildFileContextMenu.cs" />
+    <Compile Include="ContextMenus\NginxConfigFileContextMenu.cs" />
     <Compile Include="ContextMenus\VisualStudioCodeSolutionsDirectoryContextMenu.cs" />
     <Compile Include="ContextMenus\CreateSolutionFromTemplateDirectoryContextMenu.cs" />
     <Compile Include="Extensions\XElementExtensions.cs" />
+    <Compile Include="IconHandlers\NginxConfigIconHandler.cs" />
+    <Compile Include="Nginx.cs" />
     <Compile Include="NodeModules.cs" />
     <Compile Include="Nuget.cs" />
     <Compile Include="VisualStudioCodeSolutions.cs" />
@@ -103,6 +106,10 @@
     <Content Include="Artwork\JenkinsOverlay.ico" />
     <Content Include="Artwork\Lantern.ico" />
     <Content Include="Artwork\Lantern.png" />
+    <Content Include="Artwork\nginx.ico" />
+    <Content Include="Artwork\nginxConfig-16x16.png" />
+    <Content Include="Artwork\nginxConfig-225x225.png" />
+    <Content Include="Artwork\nginxConfig-32x32.png" />
     <Content Include="T4LocalContent\T4LocalContent.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4LocalContent.generatedcode.cs</LastGenOutput>

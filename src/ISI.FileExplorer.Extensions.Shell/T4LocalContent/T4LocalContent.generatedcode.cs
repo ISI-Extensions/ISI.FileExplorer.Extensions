@@ -99,6 +99,26 @@ namespace ISI.FileExplorer.Extensions.Shell
 			{
 				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(Lantern_png);
 			}
+			public static readonly string nginx_ico = _root() + "nginx.ico";
+			public static System.IO.Stream Getnginx_icoStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(nginx_ico);
+			}
+			public static readonly string nginxConfig_16x16_png = _root() + "nginxConfig-16x16.png";
+			public static System.IO.Stream GetnginxConfig_16x16_pngStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(nginxConfig_16x16_png);
+			}
+			public static readonly string nginxConfig_225x225_png = _root() + "nginxConfig-225x225.png";
+			public static System.IO.Stream GetnginxConfig_225x225_pngStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(nginxConfig_225x225_png);
+			}
+			public static readonly string nginxConfig_32x32_png = _root() + "nginxConfig-32x32.png";
+			public static System.IO.Stream GetnginxConfig_32x32_pngStream()
+			{
+				return typeof(ISI.FileExplorer.Extensions.Shell.T4Resources).Assembly.GetManifestResourceStream(nginxConfig_32x32_png);
+			}
 		}
 	}
 }

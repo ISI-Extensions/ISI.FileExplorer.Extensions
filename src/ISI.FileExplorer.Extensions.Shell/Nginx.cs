@@ -18,42 +18,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ISI.Extensions.Extensions;
 
-namespace ISI.FileExplorer.Extensions.Runner
+namespace ISI.FileExplorer.Extensions.Shell
 {
-	public partial class FileExplorerSettings
+	public class Nginx
 	{
-		public void Save(Func<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings, bool> updateSettings)
+		public static Guid ProcessNginxConfigsCommandUuid = Guid.Parse("3e5a4318-b115-4ceb-b78a-ca619f5f29f8");
+		public const string ParameterName_SelectedItemPaths = "SelectedItemPaths";
+
+		internal const string NginxJobConfigFileNameExtension = ".nginxConfig";
+
+		internal static bool IsNginxConfigFile(string fileName)
 		{
-			using (new ISI.Extensions.Locks.FileLock(SettingsFileName))
-			{
-				ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings settings = null;
-
-				if (System.IO.File.Exists(SettingsFileName))
-				{
-					using (var stream = System.IO.File.OpenRead(SettingsFileName))
-					{
-						settings = Serialization.Deserialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(stream);
-					}
-				}
-
-				settings = settings ?? new ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings();
-
-				if (updateSettings(settings))
-				{
-					if (System.IO.File.Exists(SettingsFileName))
-					{
-						//System.IO.File.Move(SettingsFileName, $"{SettingsFileName}.{DateTime.UtcNow.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortablePrecise)}");
-						System.IO.File.Delete(SettingsFileName);
-					}
-
-					using (var stream = System.IO.File.OpenWrite(SettingsFileName))
-					{
-						Serialization.Serialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(settings, stream, ISI.Extensions.Serialization.SerializationFormat.Json, true);
-					}
-				}
-			}
+			return (string.Equals(System.IO.Path.GetExtension(fileName), NginxJobConfigFileNameExtension, StringComparison.InvariantCultureIgnoreCase));
 		}
 	}
 }

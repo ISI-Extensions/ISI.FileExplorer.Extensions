@@ -1,4 +1,4 @@
-#region Copyright & License
+﻿#region Copyright & License
 /*
 Copyright (c) 2026, Integrated Solutions, Inc.
 All rights reserved.
@@ -12,48 +12,28 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ISI.Extensions.Extensions;
 
-namespace ISI.FileExplorer.Extensions.Runner
+namespace ISI.FileExplorer.Extensions.Shell
 {
-	public partial class FileExplorerSettings
+	[System.Runtime.InteropServices.ComVisible(true)]
+	[SharpShell.Attributes.DisplayName("ISI.FileExplorer.Extensions.Shell.NginxConfigIconHandler")]
+	[SharpShell.Attributes.COMServerAssociation(SharpShell.Attributes.AssociationType.ClassOfExtension, ISI.FileExplorer.Extensions.Shell.Nginx.NginxJobConfigFileNameExtension)]
+	[System.Runtime.InteropServices.Guid(ExtensionUuid)]
+	public class NginxConfigIconHandler : SharpShell.SharpIconHandler.SharpIconHandler
 	{
-		public void Save(Func<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings, bool> updateSettings)
+		public const string ExtensionUuid = "10eab516-bcc4-4f4b-a4d4-d9f1cbdbdd09";
+
+		protected override System.Drawing.Icon GetIcon(bool smallIcon, uint iconSize)
 		{
-			using (new ISI.Extensions.Locks.FileLock(SettingsFileName))
-			{
-				ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings settings = null;
+			var icon = new System.Drawing.Icon(T4Resources.Artwork.Getnginx_icoStream());
 
-				if (System.IO.File.Exists(SettingsFileName))
-				{
-					using (var stream = System.IO.File.OpenRead(SettingsFileName))
-					{
-						settings = Serialization.Deserialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(stream);
-					}
-				}
-
-				settings = settings ?? new ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings();
-
-				if (updateSettings(settings))
-				{
-					if (System.IO.File.Exists(SettingsFileName))
-					{
-						//System.IO.File.Move(SettingsFileName, $"{SettingsFileName}.{DateTime.UtcNow.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortablePrecise)}");
-						System.IO.File.Delete(SettingsFileName);
-					}
-
-					using (var stream = System.IO.File.OpenWrite(SettingsFileName))
-					{
-						Serialization.Serialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(settings, stream, ISI.Extensions.Serialization.SerializationFormat.Json, true);
-					}
-				}
-			}
+			return GetIconSpecificSize(icon, new System.Drawing.Size((int)iconSize, (int)iconSize));
 		}
 	}
 }

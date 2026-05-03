@@ -19,41 +19,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ISI.Extensions.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace ISI.FileExplorer.Extensions.Runner
+namespace ISI.FileExplorer.Extensions.Runner.ExecuteCommands
 {
-	public partial class FileExplorerSettings
+	[ExecuteCommand]
+	public class ProcessNginxConfigs_ExecuteCommand : ISI.FileExplorer.Extensions.Runner.IExecuteCommand
 	{
-		public void Save(Func<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings, bool> updateSettings)
+		public bool Handles(Guid commandUuid)
 		{
-			using (new ISI.Extensions.Locks.FileLock(SettingsFileName))
+			return (commandUuid == ISI.FileExplorer.Extensions.Shell.Nginx.ProcessNginxConfigsCommandUuid);
+		}
+
+		public System.Windows.Forms.Form Execute(ISI.Extensions.CommandLineArguments arguments)
+		{
+			if (arguments.TryGetParameterValues(ISI.FileExplorer.Extensions.Shell.Nginx.ParameterName_SelectedItemPaths, out var selectedItemPaths))
 			{
-				ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings settings = null;
+				System.Windows.Forms.Application.EnableVisualStyles();
 
-				if (System.IO.File.Exists(SettingsFileName))
+				return new ISI.NginxManager.Forms.ProcessNginxConfigsForm(selectedItemPaths)
 				{
-					using (var stream = System.IO.File.OpenRead(SettingsFileName))
-					{
-						settings = Serialization.Deserialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(stream);
-					}
-				}
-
-				settings = settings ?? new ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings();
-
-				if (updateSettings(settings))
-				{
-					if (System.IO.File.Exists(SettingsFileName))
-					{
-						//System.IO.File.Move(SettingsFileName, $"{SettingsFileName}.{DateTime.UtcNow.Formatted(DateTimeExtensions.DateTimeFormat.DateTimeSortablePrecise)}");
-						System.IO.File.Delete(SettingsFileName);
-					}
-
-					using (var stream = System.IO.File.OpenWrite(SettingsFileName))
-					{
-						Serialization.Serialize<ISI.FileExplorer.Extensions.Runner.SerializableModels.FileExplorerSettings>(settings, stream, ISI.Extensions.Serialization.SerializationFormat.Json, true);
-					}
-				}
+					ExitOnClose = true,
+				};
 			}
+
+			return null;
 		}
 	}
 }

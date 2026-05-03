@@ -72,6 +72,9 @@
 	<Fragment>
 		<ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
 			<Component Id="RegistryEntries" Guid="e84c6f5d-5296-43de-8b9f-ea244124c4d1" KeyPath="yes">
+				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\IconHandler" Type="string" Value="{10eab516-bcc4-4f4b-a4d4-d9f1cbdbdd09}" />
+				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\NginxConfigFileContextMenu" Type="string" Value="{cad0d178-fbe5-44ff-b32f-42619ee9ca52}" />
+				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\ContextMenuHandlers\NginxConfigFileContextMenu" Type="string" Value="{cad0d178-fbe5-44ff-b32f-42619ee9ca52}" />
 				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\IconHandler" Type="string" Value="{1309941f-fc9c-48fa-815a-2aaa23925bb1}" />
 				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\JenkinsConfigFileContextMenu" Type="string" Value="{fa56f0e4-bb0c-41dc-91ec-1f70770ffa3d}" />
 				<RegistryValue Root="HKCR" Key=".jenkinsConfig\shellex\ContextMenuHandlers\JenkinsConfigFileContextMenu" Type="string" Value="{fa56f0e4-bb0c-41dc-91ec-1f70770ffa3d}" />
