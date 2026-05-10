@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Nginx_Tests.cs" />
     <Compile Include="VisualStudioSolutions_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +63,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj">
+      <Project>{2cc3576f-a2b8-4ca1-bf2e-dd3c8b3c661f}</Project>
+      <Name>ISI.FileExplorer.Extensions.Runner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ISI.FileExplorer.Extensions.Shell\ISI.FileExplorer.Extensions.Shell.csproj">
       <Project>{2a6fb40e-e373-4b23-ae2b-92ca1c000d92}</Project>
       <Name>ISI.FileExplorer.Extensions.Shell</Name>

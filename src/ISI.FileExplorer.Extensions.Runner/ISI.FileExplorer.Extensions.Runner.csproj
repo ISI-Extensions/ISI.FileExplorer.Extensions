@@ -259,10 +259,10 @@
       <Version>10.0.9623.24467</Version>
     </PackageReference>
     <PackageReference Include="ISI.NginxManager.Forms">
-      <Version>4.0.9623.27434</Version>
+      <Version>4.0.9626.9802</Version>
     </PackageReference>
     <PackageReference Include="ISI.Services.NginxManager">
-      <Version>4.0.9623.27434</Version>
+      <Version>4.0.9626.9802</Version>
     </PackageReference>
     <PackageReference Include="ISI.SolutionManager">
       <Version>4.0.9623.29312</Version>
