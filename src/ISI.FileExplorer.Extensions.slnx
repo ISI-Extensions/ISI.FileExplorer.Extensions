@@ -21,6 +21,6 @@
   <Project Path="ISI.FileExplorer.Extensions.Shell.Tests/ISI.FileExplorer.Extensions.Shell.Tests.csproj" Id="21a1c9bc-9a04-41f6-8544-4adbda688032" />
   <Project Path="ISI.FileExplorer.Extensions.Shell/ISI.FileExplorer.Extensions.Shell.csproj" Id="2a6fb40e-e373-4b23-ae2b-92ca1c000d92" />
   <Properties Name="ExtensibilityGlobals" Scope="PostLoad">
-    <Property Name="FileExplorer" Value="..\" />
+    <Property Name="FileExplorer" Value="..\|..\chocolatey\" />
   </Properties>
 </Solution>

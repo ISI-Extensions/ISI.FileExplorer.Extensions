@@ -83,26 +83,26 @@ namespace ISI.FileExplorer.Extensions.Runner
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
-				if (ISI.FileExplorer.Extensions.Runner.VersionChecker.Current.CheckForUpdate())
+				//if (ISI.FileExplorer.Extensions.Runner.VersionChecker.Current.CheckForUpdate())
+				//{
+				ISI.FileExplorer.Extensions.Runner.ServiceProvider.Initialize();
+
+				var commands = ISI.Extensions.TypeLocator.Container.LocalContainer.GetImplementations<ISI.FileExplorer.Extensions.Runner.IExecuteCommand>(ISI.Extensions.ServiceLocator.Current);
+
+				var commandUuid = arguments.Command.ToGuid();
+
+				var command = commands.FirstOrDefault(cmd => cmd.Handles(commandUuid));
+
+				if (command != null)
 				{
-					ISI.FileExplorer.Extensions.Runner.ServiceProvider.Initialize();
+					var form = command.Execute(arguments);
 
-					var commands = ISI.Extensions.TypeLocator.Container.LocalContainer.GetImplementations<ISI.FileExplorer.Extensions.Runner.IExecuteCommand>(ISI.Extensions.ServiceLocator.Current);
-
-					var commandUuid = arguments.Command.ToGuid();
-
-					var command = commands.FirstOrDefault(cmd => cmd.Handles(commandUuid));
-
-					if (command != null)
+					if (form != null)
 					{
-						var form = command.Execute(arguments);
-
-						if (form != null)
-						{
-							Application.Run(form);
-						}
+						Application.Run(form);
 					}
 				}
+				//}
 			}
 		}
 

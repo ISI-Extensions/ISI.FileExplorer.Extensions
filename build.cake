@@ -211,7 +211,7 @@ Task("Production-Deploy")
 		});
 
 		var sourceControlUrl = GetSolutionSourceControlUrl();
-		var project = solutionDetails.ProjectDetailsSet.FirstOrDefault(project => project.ProjectFullName.EndsWith("ISI.FileExplorer.Extensions.Runner.csproj"))
+		var project = solutionDetails.ProjectDetailsSet.FirstOrDefault(project => project.ProjectFullName.EndsWith("ISI.FileExplorer.Extensions.Runner.csproj"));
 
 		var nuspec = GenerateNuspecFromProject(new ISI.Cake.Addin.Nuget.GenerateNuspecFromProjectRequest()
 		{
@@ -224,11 +224,12 @@ Task("Production-Deploy")
 		nuspec.ProjectUri = GetNullableUri(sourceControlUrl);
 		nuspec.Title = artifactName;
 		nuspec.Description = artifactName;
+		nuspec.Dependencies = null;
 		nuspec.Files = [
 			new ISI.Extensions.Nuget.NuspecFile()
 			{
 				Target = "tools",
-				SourcePattern = "tools\**"
+				SourcePattern = "tools\\**"
 			}
 		];
 
@@ -264,11 +265,9 @@ Task("Production-Deploy")
 				CsProjFullName = project.ProjectFullName,
 				OutputDirectory = chocoPackOutputDirectory,
 			});
-
-			DeleteFile(nuspecFile);
 		}
 
-		chocoFile = File(chocoPackOutputDirectory + "/" + artifactName + "." + dateTimeStampVersion.Version.ToString() + ".nupkg"));
+		var chocoFile = File(chocoPackOutputDirectory + "/" + artifactName + "." + dateTimeStampVersion.Version.ToString() + ".nupkg");
 
 		if(settings.CodeSigning.DoCodeSigning)
 		{
@@ -282,9 +281,8 @@ Task("Production-Deploy")
 		NupkgPush(new ISI.Cake.Addin.Nuget.NupkgPushRequest()
 		{
 			NupkgPaths = [chocoFile],
-			NugetApiKey = settings.Nuget.ApiKey,
-			RepositoryName = RepositoryUri,
-			RepositoryUri = GetNullableUri(settings.Nuget.RepositoryUrl),
+			NugetApiKey = settings.Chocolately.ApiKey,
+			RepositoryUri = GetNullableUri(settings.Chocolately.RepositoryUrl),
 		});
 
 		SetBuildArtifactEnvironmentDateTimeStampVersion(new ISI.Cake.Addin.BuildArtifacts.SetBuildArtifactEnvironmentDateTimeStampVersionRequest()
@@ -310,6 +308,14 @@ Task("Production-Deploy")
 
 		Information(string.Format("curl {0} --output {1}.Current.DateTimeStamp.Version.txt", artifactDateTimeStampVersionUrl, artifactName));
 		Information(string.Format("curl {0} --output {1}.msi", artifactDownloadUrl, artifactName));
+	});
+
+Task("Build-Deploy")
+	.IsDependentOn("Publish")
+	.IsDependentOn("Production-Deploy")
+	.Does(() => 
+	{
+		Information("Built and Deployed");
 	});
 
 Task("Default")

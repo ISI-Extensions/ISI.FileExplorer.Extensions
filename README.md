@@ -2,10 +2,25 @@
 
 Download from [ISI.FileExplorer.Extensions.msi](https://www.isi-net.com/file-store/download/6cee4d35-449c-409a-8b46-c0c3ed066323/ISI.FileExplorer.Extensions.msi)
 
+or
+
+use
+
+Chocolatey
+
+add our repo:
+
+choco source add -n=ISI -s="https://chocolatey.isi-net.com/api/v2/"
+
+choco install ISI.FileExplorer.Extensions
+
+
+
 ### File Icons
 
 * For Build Scripts
 * For Jenkins Config Files
+* For Nginx Config Files
 
 ![](Artwork/FileIcons.png)
 
@@ -13,6 +28,29 @@ Download from [ISI.FileExplorer.Extensions.msi](https://www.isi-net.com/file-sto
 
 
 ### Jenkins
+
+* Push To Jenkins
+
+If you right click on a file ending in ".jenkinsConfig" you can push the config(s) to Jenkins:
+
+![](Artwork/PushToJenkins.png)
+
+Then enter your credentials and select the config(s) you want to push to Jenkins
+
+![](Artwork/PushToJenkinsSelector.png)
+
+* Pull From Jenkins
+
+If you right click on a folder or a file ending in ".jenkinsConfig" you can pull the config(s) from Jenkins:
+
+![](Artwork/PullFromJenkins.png)
+
+Then enter your credentials and select the config(s) you want to update from Jenkins
+
+![](Artwork/PullFromJenkinsSelector.png)
+
+
+### Nginx
 
 * Push To Jenkins
 

@@ -115,3 +115,4 @@ UpgradeLog*.XML
 /src/ISI.FileExplorer.Extensions.Shell/.vs
 /tools
 .vs
+/Choco
