@@ -1,5 +1,5 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-	<Package Name="ISI.FileExplorer.Extensions" Manufacturer="Integrated Solutions Inc." Version="3.0.0.0" UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7">
+	<Package Name="ISI.FileExplorer.Extensions" Manufacturer="Integrated Solutions Inc" Version="3.0.0.0" UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7">
 		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
 		<MediaTemplate EmbedCab="yes" />
@@ -20,7 +20,7 @@
 		</Upgrade>
 
 		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="deferred" Return="check" Impersonate="no" />
-		<!--<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />-->
+		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
 		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="deferred" Return="check" Impersonate="no" />
 		
 		<InstallExecuteSequence>
@@ -62,10 +62,10 @@
 			<Files Include="$(ISI.FileExplorer.Extensions.Runner.TargetDir)**">
 				<Exclude Files="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe" />
 			</Files>
-			<!--<Component Id="AppExecutable" Bitness="always64">            
+			<Component Id="AppExecutable" Bitness="always64">            
 				<File Id="AppExecutable" Source="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe"/>   
 				<Shortcut Name="ISI.FileExplorer.Extensions - Check For Update" Directory="ProgramMenuFolder" Advertise="yes" Icon="Lantern.ico"/>
-			</Component>-->
+			</Component>
 		</ComponentGroup>
 	</Fragment>
 

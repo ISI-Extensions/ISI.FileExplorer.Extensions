@@ -14,6 +14,7 @@ var rootProjectFile = File("./src/ISI.FileExplorer.Extensions.Runner/ISI.FileExp
 var rootAssemblyVersionKey = "ISI.FileExplorer.Extensions";
 var artifactName = "ISI.FileExplorer.Extensions";
 var setupBuildArtifactName = "ISI.FileExplorer.Extensions.Setup";
+var chocoBuildArtifactName = "ISI.FileExplorer";
 
 var buildDateTime = DateTime.UtcNow;
 var buildDateTimeStamp = GetDateTimeStamp(buildDateTime);
@@ -219,11 +220,11 @@ Task("Production-Deploy")
 			IncludeSBom = false,
 			Settings = settings,
 		}).Nuspec;
-		nuspec.Package = artifactName;
+		nuspec.Package = chocoBuildArtifactName;
 		nuspec.Version = dateTimeStampVersion.Version.ToString();
 		nuspec.ProjectUri = GetNullableUri(sourceControlUrl);
-		nuspec.Title = artifactName;
-		nuspec.Description = artifactName;
+		nuspec.Title = chocoBuildArtifactName;
+		nuspec.Description = chocoBuildArtifactName;
 		nuspec.Dependencies = null;
 		nuspec.Files = [
 			new ISI.Extensions.Nuget.NuspecFile()
@@ -251,7 +252,7 @@ Task("Production-Deploy")
 				System.IO.File.WriteAllText(targetFullName, content);
 			}
 
-			var nuspecFile = File(tempDirectory.FullName + "/" + artifactName + ".nuspec");
+			var nuspecFile = File(tempDirectory.FullName + "/" + chocoBuildArtifactName + ".nuspec");
 
 			CreateNuspecFile(new ISI.Cake.Addin.Nuget.CreateNuspecFileRequest()
 			{
@@ -267,7 +268,7 @@ Task("Production-Deploy")
 			});
 		}
 
-		var chocoFile = File(chocoPackOutputDirectory + "/" + artifactName + "." + dateTimeStampVersion.Version.ToString() + ".nupkg");
+		var chocoFile = File(chocoPackOutputDirectory + "/" + chocoBuildArtifactName + "." + dateTimeStampVersion.Version.ToString() + ".nupkg");
 
 		if(settings.CodeSigning.DoCodeSigning)
 		{
