@@ -28,6 +28,8 @@ Information("BuildDateTimeStampVersion: {0}", buildDateTimeStampVersion);
 
 var buildArtifactMsiFile = File(string.Format("./Publish/{0}.{1}.msi", artifactName, buildDateTimeStamp));
 
+var chocoPackOutputDirectory = Argument("ChocolatelyPackOutputDirectory", System.IO.Path.GetFullPath("./Choco"));
+
 Task("Clean")
 	.Does(() =>
 	{
@@ -39,6 +41,9 @@ Task("Clean")
 			CleanDirectories(projectPath + "/**/bin/" + configuration);
 			CleanDirectories(projectPath + "/**/obj/" + configuration);
 		}
+
+		Information("Cleaning {0}", chocoPackOutputDirectory);
+		CleanDirectories(chocoPackOutputDirectory);
 	});
 
 Task("NugetPackageRestore")
@@ -196,6 +201,91 @@ Task("Production-Deploy")
 			BuildArtifactName = artifactName,
 			Environment = "Build",
 		}).DateTimeStampVersion;
+
+		var getBuildArtifactResponse = GetBuildArtifact(new ISI.Cake.Addin.BuildArtifacts.GetBuildArtifactRequest()
+		{
+			BuildArtifactsApiUri = GetNullableUri(settings.BuildArtifacts.ApiUrl),
+			BuildArtifactsApiKey = buildArtifactsApiKey,
+			BuildArtifactName = artifactName,
+			DateTimeStampVersion = dateTimeStampVersion,
+		});
+
+		var sourceControlUrl = GetSolutionSourceControlUrl();
+		var project = solutionDetails.ProjectDetailsSet.FirstOrDefault(project => project.ProjectFullName.EndsWith("ISI.FileExplorer.Extensions.Runner.csproj"))
+
+		var nuspec = GenerateNuspecFromProject(new ISI.Cake.Addin.Nuget.GenerateNuspecFromProjectRequest()
+		{
+			ProjectFullName =  System.IO.Path.GetFullPath(project.ProjectFullName),
+			IncludeSBom = false,
+			Settings = settings,
+		}).Nuspec;
+		nuspec.Package = artifactName;
+		nuspec.Version = dateTimeStampVersion.Version.ToString();
+		nuspec.ProjectUri = GetNullableUri(sourceControlUrl);
+		nuspec.Title = artifactName;
+		nuspec.Description = artifactName;
+		nuspec.Files = [
+			new ISI.Extensions.Nuget.NuspecFile()
+			{
+				Target = "tools",
+				SourcePattern = "tools\**"
+			}
+		];
+
+		using(var tempDirectory = GetNewTempDirectory())
+		{
+			var srcDirectory = System.IO.Path.GetFullPath("./chocolatey");
+
+			foreach (var sourceFullName in System.IO.Directory.EnumerateFiles(srcDirectory, "*", System.IO.SearchOption.AllDirectories))
+			{
+				var targetFullName = System.IO.Path.Combine(tempDirectory.FullName, sourceFullName.Substring(srcDirectory.Length + 1));
+
+				var content = System.IO.File.ReadAllText(sourceFullName);
+
+				content = content.Replace("${installerUrl}", getBuildArtifactResponse.AnonymousDownloadUrl);
+				content = content.Replace("${sha512Checksum}", getBuildArtifactResponse.BuildArtifact.SHA512Hash);
+
+				System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(targetFullName));
+
+				System.IO.File.WriteAllText(targetFullName, content);
+			}
+
+			var nuspecFile = File(tempDirectory.FullName + "/" + artifactName + ".nuspec");
+
+			CreateNuspecFile(new ISI.Cake.Addin.Nuget.CreateNuspecFileRequest()
+			{
+				Nuspec = nuspec,
+				NuspecFullName = nuspecFile.Path.FullPath,
+			});
+
+			NupkgPack(new ISI.Cake.Addin.Nuget.NupkgPackRequest()
+			{
+				NuspecFullName = nuspecFile.Path.FullPath,
+				CsProjFullName = project.ProjectFullName,
+				OutputDirectory = chocoPackOutputDirectory,
+			});
+
+			DeleteFile(nuspecFile);
+		}
+
+		chocoFile = File(chocoPackOutputDirectory + "/" + artifactName + "." + dateTimeStampVersion.Version.ToString() + ".nupkg"));
+
+		if(settings.CodeSigning.DoCodeSigning)
+		{
+			SignNupkgs(new ISI.Cake.Addin.CodeSigning.SignNupkgsUsingSettingsRequest()
+			{
+				NupkgPaths = [chocoFile],
+				Settings = settings,
+			});
+		}
+
+		NupkgPush(new ISI.Cake.Addin.Nuget.NupkgPushRequest()
+		{
+			NupkgPaths = [chocoFile],
+			NugetApiKey = settings.Nuget.ApiKey,
+			RepositoryName = RepositoryUri,
+			RepositoryUri = GetNullableUri(settings.Nuget.RepositoryUrl),
+		});
 
 		SetBuildArtifactEnvironmentDateTimeStampVersion(new ISI.Cake.Addin.BuildArtifacts.SetBuildArtifactEnvironmentDateTimeStampVersionRequest()
 		{
