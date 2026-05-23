@@ -139,23 +139,8 @@ Task("Publish")
 			Environment = "Build",
 			DateTimeStampVersion = buildDateTimeStampVersion,
 		});
-	});
-	
-Task("Production-Deploy")
-	.Does(() => 
-	{
-		var buildArtifactsApiKey = GetBuildArtifactsApiKey(new ISI.Cake.Addin.BuildArtifacts.GetBuildArtifactsApiKeyUsingSettingsActiveDirectoryRequest()
-		{
-			Settings = settings,
-		}).BuildArtifactsApiKey;
 
-		var dateTimeStampVersion = GetBuildArtifactEnvironmentDateTimeStampVersion(new ISI.Cake.Addin.BuildArtifacts.GetBuildArtifactEnvironmentDateTimeStampVersionRequest()
-		{
-			BuildArtifactsApiUri = GetNullableUri(settings.BuildArtifacts.ApiUrl),
-			BuildArtifactsApiKey = buildArtifactsApiKey,
-			BuildArtifactName = artifactName,
-			Environment = "Build",
-		}).DateTimeStampVersion;
+		var dateTimeStampVersion = buildDateTimeStampVersion;
 
 		var getBuildArtifactResponse = GetBuildArtifact(new ISI.Cake.Addin.BuildArtifacts.GetBuildArtifactRequest()
 		{
@@ -263,14 +248,6 @@ Task("Production-Deploy")
 
 		Information(string.Format("curl {0} --output {1}.Current.DateTimeStamp.Version.txt", artifactDateTimeStampVersionUrl, artifactName));
 		Information(string.Format("curl {0} --output {1}.msi", artifactDownloadUrl, artifactName));
-	});
-
-Task("Build-Deploy")
-	.IsDependentOn("Publish")
-	.IsDependentOn("Production-Deploy")
-	.Does(() => 
-	{
-		Information("Built and Deployed");
 	});
 
 Task("Default")
