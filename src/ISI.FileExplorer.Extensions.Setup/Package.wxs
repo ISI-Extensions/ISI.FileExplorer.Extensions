@@ -1,10 +1,13 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-	<Package Name="ISI.FileExplorer.Extensions" Manufacturer="Integrated Solutions Inc" Version="3.0.0.0" UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7">
+	<?define UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7" ?>
+	<?define ProductName="ISI.FileExplorer.Extensions" ?>
+
+	<Package Name="$(var.ProductName)" Manufacturer="Integrated Solutions Inc" Version="3.0.0.0" UpgradeCode="$(var.UpgradeCode)">
 		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
 		<MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="ISI.FileExplorer.Extensions" Level="1">
+		<Feature Id="ProductFeature" Title="$(var.ProductName)" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="RegistryComponents" />
 		</Feature>
@@ -12,21 +15,29 @@
 		<Icon Id="Lantern.ico" SourceFile="Lantern.ico" />
 
 		<Property Id="ARPPRODUCTICON" Value="Lantern.ico" />
-		
+
 		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
-		
-		<Upgrade Id="84159581-7a82-4e9a-9536-636aec1cca0c">
-			<UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
+		<Upgrade Id="6cdee5fb-7722-41cb-ac15-976b049325a7">
+			<UpgradeVersion OnlyDetect="yes" Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="yes" />
 		</Upgrade>
 
+		<SetProperty Id="_INSTALL"   After="FindRelatedProducts" Value="1" Condition="Installed = &quot;&quot; AND PREVIOUSVERSIONSINSTALLED = &quot;&quot;" />
+		<SetProperty Id="_UNINSTALL" After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED=&quot;&quot; AND REMOVE=&quot;ALL&quot;" />
+		<SetProperty Id="_CHANGE"    After="FindRelatedProducts" Value="1" Condition="Installed&lt;&gt;&quot;&quot; AND REINSTALL=&quot;&quot; AND PREVIOUSVERSIONSINSTALLED&lt;&gt;&quot;&quot; AND REMOVE=&quot;&quot;" />
+		<SetProperty Id="_REPAIR"    After="FindRelatedProducts" Value="1" Condition="REINSTALL&lt;&gt;&quot;&quot;" />
+		<SetProperty Id="_UPGRADE"   After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED&lt;&gt;&quot;&quot;" />
+
 		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="deferred" Return="check" Impersonate="no" />
-		<!--<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />-->
+		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
 		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="deferred" Return="check" Impersonate="no" />
 		
 		<InstallExecuteSequence>
-			<Custom Action="InstallShell" After="InstallFiles" Condition="NOT Installed" />
+			<Custom Action="InstallShell" After="InstallFiles" Condition="_INSTALL" />
+			<Custom Action="UninstallShell" Before="RemoveFiles" Condition="_UNINSTALL" />
+			
+			<!--<Custom Action="InstallShell" After="InstallFiles" Condition="NOT PREVIOUSVERSIONSINSTALLED" />-->
 			<!--<Custom Action="LaunchBrowser" After="InstallFinalize" Condition="NOT Installed" />-->
-			<!--<Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE=&quot;ALL&quot;)" />-->
+			<!--<Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT PREVIOUSVERSIONSINSTALLED) AND (REMOVE=&quot;ALL&quot;)" />-->
 		</InstallExecuteSequence>
 
 		<UI Id="UserInterface">

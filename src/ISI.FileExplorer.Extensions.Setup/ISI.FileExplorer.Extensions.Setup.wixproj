@@ -1,11 +1,18 @@
-﻿<Project Sdk="WixToolset.Sdk/6.0.1">
-  <ItemGroup>
-    <Content Include="Lantern.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="[6.0.2,7.0.0)" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj" />
-  </ItemGroup>
+﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+	<PropertyGroup>
+		<SignOutput>true</SignOutput>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="Lantern.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="WixToolset.UI.wixext" Version="[6.0.2,7.0.0)" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ISI.FileExplorer.Extensions.Runner\ISI.FileExplorer.Extensions.Runner.csproj" />
+	</ItemGroup>
+	<Target Name="SignMsi" Condition=" '$(SignAssemblyCommand)' != '' ">
+		<Message Importance="high" Text="SignMsi: @(SignMsi)" />
+		<Exec Command="$(SignAssemblyCommand) &quot;%(SignMsi.FullPath)&quot;" />
+	</Target>
 </Project>

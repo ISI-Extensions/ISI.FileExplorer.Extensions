@@ -94,54 +94,8 @@ Task("Build")
 		}
 	});
 
-Task("Sign")
-	.IsDependentOn("Build")
-	.Does(() =>
-	{
-		if (configuration.Equals("Release"))
-		{
-			var files = GetFiles("./src/ISI.FileExplorer.Extensions.Setup/bin/x64/" + configuration + "/en-US/ISI.FileExplorer.Extensions.msi");
-
-			if(files.Any())
-			{
-				Information("Signing assemblies");
-				using(var tempDirectory = GetNewTempDirectory())
-				{
-					foreach(var file in files)
-					{
-						var tempFile = File(tempDirectory.FullName + "/" + file.GetFilename());
-
-						if(System.IO.File.Exists(tempFile.Path.FullPath))
-						{
-							DeleteFile(tempFile);
-						}
-
-						CopyFile(file, tempFile);
-					}
-
-					var tempFiles = GetFiles(tempDirectory.FullName + "/*");
-
-					SignAssemblies(new ISI.Cake.Addin.CodeSigning.SignAssembliesUsingSettingsRequest()
-					{
-						Settings = settings,
-						AssemblyPaths = tempFiles,
-					});
-
-					foreach(var file in files)
-					{
-						var tempFile = File(tempDirectory.FullName + "/" + file.GetFilename());
-
-						DeleteFile(file);
-
-						CopyFile(tempFile, file);
-					}
-				}
-			}
-		}
-	});
-
 Task("Package")
-	.IsDependentOn("Sign")
+	.IsDependentOn("Build")
 	.Does(() =>
 	{
 		CreateDirectory(buildArtifactMsiFile.Path.GetDirectory().FullPath);
