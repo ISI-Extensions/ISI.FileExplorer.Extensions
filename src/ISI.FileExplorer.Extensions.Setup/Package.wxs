@@ -18,7 +18,7 @@
 
 		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
 		<Upgrade Id="6cdee5fb-7722-41cb-ac15-976b049325a7">
-			<UpgradeVersion OnlyDetect="yes" Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="yes" />
+			<UpgradeVersion OnlyDetect="no" Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="yes" />
 		</Upgrade>
 
 		<SetProperty Id="_INSTALL"   After="FindRelatedProducts" Value="1" Condition="Installed = &quot;&quot; AND PREVIOUSVERSIONSINSTALLED = &quot;&quot;" />
