@@ -22,10 +22,10 @@
 		</Upgrade>
 
 		<SetProperty Id="_INSTALL"   After="FindRelatedProducts" Value="1" Condition="Installed = &quot;&quot; AND PREVIOUSVERSIONSINSTALLED = &quot;&quot;" />
-		<SetProperty Id="_UNINSTALL" After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED=&quot;&quot; AND REMOVE=&quot;ALL&quot;" />
-		<SetProperty Id="_CHANGE"    After="FindRelatedProducts" Value="1" Condition="Installed&lt;&gt;&quot;&quot; AND REINSTALL=&quot;&quot; AND PREVIOUSVERSIONSINSTALLED&lt;&gt;&quot;&quot; AND REMOVE=&quot;&quot;" />
-		<SetProperty Id="_REPAIR"    After="FindRelatedProducts" Value="1" Condition="REINSTALL&lt;&gt;&quot;&quot;" />
-		<SetProperty Id="_UPGRADE"   After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED&lt;&gt;&quot;&quot;" />
+		<SetProperty Id="_UNINSTALL" After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED &lt;&gt; &quot;&quot; AND REMOVE = &quot;ALL&quot;" />
+		<SetProperty Id="_CHANGE"    After="FindRelatedProducts" Value="1" Condition="Installed &lt;&gt; &quot;&quot; AND REINSTALL = &quot;&quot; AND PREVIOUSVERSIONSINSTALLED &lt;&gt; &quot;&quot; AND REMOVE = &quot;&quot;" />
+		<SetProperty Id="_REPAIR"    After="FindRelatedProducts" Value="1" Condition="REINSTALL &lt;&gt; &quot;&quot;" />
+		<SetProperty Id="_UPGRADE"   After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED &lt;&gt; &quot;&quot;" />
 
 		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="deferred" Return="check" Impersonate="no" />
 		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
