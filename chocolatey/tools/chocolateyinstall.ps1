@@ -8,7 +8,7 @@ $packageArgs = @{
   fileType      = 'MSI'
   url           = $url
 
-  softwareName  = 'ISI.FileExplorer.Extensions.msi*'
+  softwareName  = 'ISI.FileExplorer.Extensions.Setup.msi*'
 
   checksum      = '${sha512Checksum}'
   checksumType  = 'sha512'
