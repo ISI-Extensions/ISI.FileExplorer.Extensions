@@ -27,9 +27,9 @@
 		<SetProperty Id="_REPAIR"    After="FindRelatedProducts" Value="1" Condition="REINSTALL &lt;&gt; &quot;&quot;" />
 		<SetProperty Id="_UPGRADE"   After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED &lt;&gt; &quot;&quot;" />
 
-		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="deferred" Return="check" Impersonate="no" />
+		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="immediate" Return="check" Impersonate="no" />
 		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
-		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="deferred" Return="check" Impersonate="no" />
+		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="immediate" Return="check" Impersonate="no" />
 		
 		<InstallExecuteSequence>
 			<Custom Action="InstallShell" After="InstallFiles" Condition="_INSTALL" />
