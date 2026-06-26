@@ -176,7 +176,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Lantern.ico</ApplicationIcon>
@@ -205,58 +206,58 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ISI.Extensions">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Ant">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.BitBucket">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Cake">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.DependencyInjection.Iunq">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Git">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.GitHub">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Jenkins.Forms">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.JsonSerialization.Newtonsoft">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Nuget">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Scm">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.ScmManager">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.Svn">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudio.Forms">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudioCode">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.Extensions.VisualStudioCode.Forms">
-      <Version>10.0.9673.29224</Version>
+      <Version>10.0.9673.36434</Version>
     </PackageReference>
     <PackageReference Include="ISI.NginxManager.Forms">
       <Version>4.0.9673.27811</Version>
