@@ -1,4 +1,4 @@
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
 	<?define UpgradeCode="6cdee5fb-7722-41cb-ac15-976b049325a7" ?>
 	<?define ProductName="ISI.FileExplorer.Extensions" ?>
 
@@ -11,7 +11,7 @@
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="RegistryComponents" />
 		</Feature>
-		
+
 		<Icon Id="Lantern.ico" SourceFile="Lantern.ico" />
 
 		<Property Id="ARPPRODUCTICON" Value="Lantern.ico" />
@@ -27,14 +27,14 @@
 		<SetProperty Id="_REPAIR"    After="FindRelatedProducts" Value="1" Condition="REINSTALL &lt;&gt; &quot;&quot;" />
 		<SetProperty Id="_UPGRADE"   After="FindRelatedProducts" Value="1" Condition="PREVIOUSVERSIONSINSTALLED &lt;&gt; &quot;&quot;" />
 
-		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="immediate" Return="check" Impersonate="no" />
+		<CustomAction Id="InstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; install" Execute="immediate" Return="ignore" Impersonate="no" />
 		<CustomAction Id="LaunchBrowser" Directory="INSTALLFOLDER" ExeCommand="rundll32 url.dll,FileProtocolHandler https://github.com/ISI-Extensions/ISI.FileExplorer.Extensions" Return="asyncNoWait" />
-		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="immediate" Return="check" Impersonate="no" />
-		
+		<CustomAction Id="UninstallShell" Directory="INSTALLFOLDER" ExeCommand="&quot;[INSTALLFOLDER]ISI.FileExplorer.Extensions.Runner.exe&quot; uninstall" Execute="immediate" Return="ignore" Impersonate="no" />
+
 		<InstallExecuteSequence>
 			<Custom Action="InstallShell" After="InstallFiles" Condition="_INSTALL" />
 			<Custom Action="UninstallShell" Before="RemoveFiles" Condition="_UNINSTALL" />
-			
+
 			<!--<Custom Action="InstallShell" After="InstallFiles" Condition="NOT PREVIOUSVERSIONSINSTALLED" />-->
 			<!--<Custom Action="LaunchBrowser" After="InstallFinalize" Condition="NOT Installed" />-->
 			<!--<Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT PREVIOUSVERSIONSINSTALLED) AND (REMOVE=&quot;ALL&quot;)" />-->
@@ -59,7 +59,7 @@
 
 		<UIRef Id="WixUI_Common" />
 	</Package>
-	
+
 	<Fragment>
 		<StandardDirectory Id="ProgramFiles6432Folder">
 			<Directory Id="ManufacturerFolder" Name="!(bind.Property.Manufacturer)">
@@ -73,8 +73,8 @@
 			<Files Include="$(ISI.FileExplorer.Extensions.Runner.TargetDir)**">
 				<Exclude Files="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe" />
 			</Files>
-			<Component Id="AppExecutable" Bitness="always64">            
-				<File Id="AppExecutable" Source="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe"/>   
+			<Component Id="AppExecutable" Bitness="always64">
+				<File Id="AppExecutable" Source="$(ISI.FileExplorer.Extensions.Runner.TargetDir)ISI.FileExplorer.Extensions.Runner.exe"/>
 				<Shortcut Name="ISI.FileExplorer.Extensions - Check For Update" Directory="ProgramMenuFolder" Advertise="yes" Icon="Lantern.ico"/>
 			</Component>
 		</ComponentGroup>
@@ -82,7 +82,7 @@
 
 	<Fragment>
 		<ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
-			<Component Id="RegistryEntries" Guid="e84c6f5d-5296-43de-8b9f-ea244124c4d1" KeyPath="yes">
+			<Component Id="RegistryEntries" Guid="e84c6f5d-5296-43de-8b9f-ea244124c4d1" KeyPath="yes" Condition="_INSTALL">
 				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\IconHandler" Type="string" Value="{10eab516-bcc4-4f4b-a4d4-d9f1cbdbdd09}" />
 				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\NginxConfigFileContextMenu" Type="string" Value="{cad0d178-fbe5-44ff-b32f-42619ee9ca52}" />
 				<RegistryValue Root="HKCR" Key=".nginxConfig\shellex\ContextMenuHandlers\NginxConfigFileContextMenu" Type="string" Value="{cad0d178-fbe5-44ff-b32f-42619ee9ca52}" />
